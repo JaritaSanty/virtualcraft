@@ -43,7 +43,7 @@
                           <th><a href="" ng-click="sortBy('niv_nombre')">Nivell</a></th>
                           <th><a href="" ng-click="sortBy('equ_nombre')">Equip</a></th>
                           <th><a href="" ng-click="sortBy('pri_nombre')">Privilegi</a></th>
-                          <th><a href="" ng-click="sortBy('prieje_tipo')">Accioni</a></th>
+                          <th><a href="" ng-click="sortBy('prieje_tipo')">Acció</a></th>
                           <th><a href="" ng-click="sortBy('prieje_fecha')">Data</a></th>
                         </tr>
                       </thead>

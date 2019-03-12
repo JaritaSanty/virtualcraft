@@ -28,7 +28,7 @@
                   <table id="tableTrabajos" class="table table-bordered table-responsive" style="font-family:Cooperplate Gothic Light;">
                     <thead>
                       <tr>
-                        <th><a href="" ng-click="sortBy('tra_nombre')">Trevall</a></th>
+                        <th><a href="" ng-click="sortBy('tra_nombre')">Treball</a></th>
                         <th><a href="" ng-click="sortBy('tra_descripcion')">Descripció</a></th>
                         <th><a href="" ng-click="sortBy('tra_PV')">PV</a></th>
                         <th><a href="" ng-click="sortBy('tra_PD')">PD</a></th>

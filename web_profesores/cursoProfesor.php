@@ -46,7 +46,7 @@
             <th><a href=""ng-click="sortBy('aluclaequ_PP')">PP</a></th>
             <th><a href="" ng-click="sortBy('aluclaequ_FO')">FO</a></th>
             <th><a href="" ng-click="sortBy('aluclaequ_FO')">Privilegi itilizat</a></th>
-            <th style="text-align:center;"><a href="">Accioni</a></th>
+            <th style="text-align:center;"><a href="">Acció</a></th>
           </tr>
         </thead>
         <tbody>

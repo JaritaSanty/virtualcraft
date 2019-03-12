@@ -1,7 +1,7 @@
 <div class="container" style="background-color:#F5F5F5;">
   <div class="row">
     <div class="col-xs-12 col-md-12">
-      <h1 class="text-center" style="font-family:Cooperplate Gothic Light;"><b>Els Meus Classes</b></h1>
+      <h1 class="text-center" style="font-family:Cooperplate Gothic Light;"><b>Les Meves Classes</b></h1>
       <h3 class="text-center"><a href="" ng-click="showNuevoCurso()" title="Nova Classe" style="font-family:Cooperplate Gothic Light;">+ Nova Classe</a></h3>
     </div>
   </div>

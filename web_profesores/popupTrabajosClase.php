@@ -36,7 +36,7 @@ font-size: 15px;
         <md-dialog-content class="container-fluid">
           <div class="md-dialog-content">
             <uib-tabset class="nav nav-pills nav-justified container" active="activeJustified" justified="true" style="font-family:Cooperplate Gothic Light;">
-              <uib-tab index="0" heading="Sense Aprovar" ng-click="CargarTablaTrabajosAsignados('0')">
+              <uib-tab index="0" heading="Sense Aprovats" ng-click="CargarTablaTrabajosAsignados('0')">
                 <br/>
                 <div class="row">
                     <div class="col-xs-4 col-md-4"></div>
@@ -66,7 +66,7 @@ font-size: 15px;
                   </div>
                 </div>
               </uib-tab>
-              <uib-tab index="1" heading="Aprobats" ng-click="CargarTablaTrabajosAsignados('1')">
+              <uib-tab index="1" heading="Aprovats" ng-click="CargarTablaTrabajosAsignados('1')">
                 <div class="row">
                     <div class="col-xs-4 col-md-4"></div>
                     <div class="col-xs-4 col-md-4">
