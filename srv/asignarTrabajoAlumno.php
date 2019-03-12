@@ -1,6 +1,4 @@
 <?php
-$obj = json_decode($_POST["datosCurso"]);
-$cla_id = $obj->cla_id;
 
 require_once 'db_config.php';
 
