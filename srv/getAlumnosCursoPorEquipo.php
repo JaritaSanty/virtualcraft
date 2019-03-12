@@ -27,7 +27,8 @@ $stmtAlumnosClase = $DBcon->prepare("SELECT ace.aluclaequ_id, ac.alucla_id, a.al
                                       INNER JOIN rolesniveles AS rn ON rn.rolniv_id = ace.rolniv_id
                                       INNER JOIN roles AS r ON r.rol_id = rn.rol_id
                                       INNER JOIN niveles AS n ON n.niv_id = rn.niv_id
-                                      WHERE ace.aluclaequ_estado = 1 AND ace.equ_id = :equ_id AND ace.alucla_id IN (SELECT alucla_id FROM alumnosclases WHERE cla_id = :cla_id)");
+                                      WHERE ace.aluclaequ_estado = 1 AND ace.equ_id = :equ_id AND ace.alucla_id IN (SELECT alucla_id FROM alumnosclases WHERE cla_id = :cla_id)
+                                      ORDER BY CONCAT(u.usu_apellido, ' ', u.usu_nombre) ASC");
 
 $stmtAlumnosClase->bindParam(':cla_id', $cla_id, PDO::PARAM_STR);
 $stmtAlumnosClase->bindParam(':equ_id', $equ_id, PDO::PARAM_STR);

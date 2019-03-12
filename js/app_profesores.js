@@ -478,7 +478,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
         $scope.alumnos[i].btnRol = false;
       }
     }
-    $scope.propertyName = 'aluclaequ_id';
+    $scope.propertyName = 'aluclaequ_nombre';
     $scope.reverse = false;
     $scope.sortBy = function(propertyName){
         $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : true;
@@ -1286,7 +1286,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
         $scope.alumnos[i].btnRol = false;
       }
     }
-    $scope.propertyName = 'aluclaequ_id';
+    $scope.propertyName = 'aluclaequ_nombre';
     $scope.reverse = false;
     $scope.sortBy = function(propertyName){
         $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : true;
