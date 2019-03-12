@@ -1,6 +1,7 @@
 <?php
-
 require_once 'db_config.php';
+$log_descripcion = utf8_decode ($_POST['log_descripcion']);
+
 $stmt = $DBcon->prepare("UPDATE alumnosclasesequipos
                           SET aluclaequ_PV = CASE
                                                   WHEN  (aluclaequ_PV + :aluclaequ_equPV) < 0 THEN 0
@@ -10,7 +11,7 @@ $stmt = $DBcon->prepare("UPDATE alumnosclasesequipos
                               aluclaequ_PD = CASE
                                                   WHEN  (aluclaequ_PD + :aluclaequ_equPD) < 0 THEN 0
                                                   WHEN  (aluclaequ_PD + :aluclaequ_equPD) > 100 THEN 100
-                                                  ELSE (aluclaequ_PD + :aluclaequ_equPD) 
+                                                  ELSE (aluclaequ_PD + :aluclaequ_equPD)
                                                   END,
                               aluclaequ_PO = CASE
                                                   WHEN  (aluclaequ_PO + :aluclaequ_equPO) < 0 THEN 0
@@ -34,7 +35,7 @@ $stmt = $DBcon->prepare("UPDATE alumnosclasesequipos
                           INNER JOIN equipos AS e ON e.equ_id = ace.equ_id
                           WHERE ace.aluclaequ_estado = 1 AND ace.equ_id = :equ_id;");
 
-$stmt->bindParam(':log_descripcion', $_POST['log_descripcion'], PDO::PARAM_STR);
+$stmt->bindParam(':log_descripcion', $log_descripcion, PDO::PARAM_STR);
 $stmt->bindParam(':aluclaequ_equPV', $_POST['aluclaequ_equPV'], PDO::PARAM_STR);
 $stmt->bindParam(':aluclaequ_equPD', $_POST['aluclaequ_equPD'], PDO::PARAM_STR);
 $stmt->bindParam(':aluclaequ_equPO', $_POST['aluclaequ_equPO'], PDO::PARAM_STR);
