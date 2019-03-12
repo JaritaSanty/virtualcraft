@@ -1,6 +1,4 @@
 <?php
-$obj = json_decode($_POST["datosUsuario"]);
-$pro_id = $obj[0]->pro_id;
 
 require_once 'db_config.php';
 $stmt = $DBcon->prepare("SELECT niv_id, niv_nombre FROM niveles");
