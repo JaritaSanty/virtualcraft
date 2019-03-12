@@ -66,7 +66,7 @@
               <a title="Premiar Alumne" ng-href="" ng-click="showPremioAlumno(ev,alumno);"><i class="glyphicon glyphicon-ok-circle"></i></a>
               <a title="Castigar Alumne" ng-href="" ng-click="showCastigoAlumno(ev,alumno);"><i class="glyphicon glyphicon-remove-circle"></i></a>
               <a title="Pujar/Baixar Punts a l'Alumne" ng-href="" ng-click="showSubirBajarPuntosAlumno(ev,alumno);"><i class="glyphicon glyphicon-sort"></i></a>
-              <a title="Assignar Rol/Nivell" ng-show="alumno.btnRol" ng-href="" ng-click="showAsignarRolNivelAlumno(ev,alumno);"><i class="glyphicon glyphicon-log-in"></i></a>
+              <a title="Assignar Rol/Nivell" ng-href="" ng-click="showAsignarRolNivelAlumno(ev,alumno);"><i class="glyphicon glyphicon-log-in"></i></a>
             </td>
           </tr>
         </tbody>
