@@ -1,6 +1,4 @@
 <?php
-$obj = json_decode($_POST["datosEquipo"]);
-$equ_id = $obj->equ_id;
 
 require_once 'db_config.php';
 
