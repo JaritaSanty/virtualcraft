@@ -1,5 +1,6 @@
 <?php
 require_once 'db_config.php';
+$log_descripcion = utf8_decode ($_POST['log_descripcion']);
 
 $stmt = $DBcon->prepare("UPDATE alumnosclasesequipos
                           SET
@@ -34,7 +35,7 @@ $stmt->bindParam(':aluclaequ_aluPD', $_POST['aluclaequ_aluPD'], PDO::PARAM_STR);
 $stmt->bindParam(':aluclaequ_aluPO', $_POST['aluclaequ_aluPO'], PDO::PARAM_STR);
 $stmt->bindParam(':aluclaequ_aluPP', $_POST['aluclaequ_aluPP'], PDO::PARAM_STR);
 $stmt->bindParam(':aluclaequ_aluFO', $_POST['aluclaequ_aluFO'], PDO::PARAM_STR);
-$stmt->bindParam(':log_descripcion', $_POST['log_descripcion'], PDO::PARAM_STR);
+$stmt->bindParam(':log_descripcion', $log_descripcion, PDO::PARAM_STR);
 $stmt->bindParam(':aluclaequ_id', $_POST['aluclaequ_id'], PDO::PARAM_INT);
 
 if ($stmt->execute()) {
