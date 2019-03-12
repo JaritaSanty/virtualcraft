@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="AppIndex">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta http-equiv="Content-Security-Policy" content="default-src *; img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
+    <title>Virtual Craft</title>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link rel="stylesheet" href="css/font-awesome.css" type="text/css" media="all">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+    <link href="css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="css/angular-material.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body ng-controller="LoginController as angCtrl">
+  <img class="text-center" src="images/logo.png" width="25%"/>
+  <div class="content-w3ls" style="justify-content: center; align-items: center;">
+      <div class="content-bottom text-center">
+          <form ng-submit="angCtrl.loginForm()" method="post">
+            <div class="field-group">
+                <span class="fa fa-user" aria-hidden="true"></span>
+                <div class="wthree-field">
+                    <input ng-model="angCtrl.inputData.usuario" type="text" value="" placeholder="USUARI" required>
+                </div>
+            </div>
+            <div class="field-group">
+                <span class="fa fa-lock" aria-hidden="true"></span>
+                <div class="wthree-field">
+                    <input ng-model="angCtrl.inputData.password" type="Password" placeholder="CONTRASENYA" required>
+                </div>
+            </div>
+            <div class="wthree-field">
+                <input type="submit" value="ENTRADA" ng-disabled="myForm.$invalid"/>
+            </div>
+          </form>
+      </div>
+  </div>
+  <div class="copyright text-center">
+      <p>© 2019 Virtual Craft. Versión 2.0</p>
+  </div>
+    <script src="js/angular.js" type="text/javascript"></script>
+    <script src="js/angular-route.js" type="text/javascript"></script>
+    <script src="js/angular-cookies.js" type="text/javascript"></script>
+    <script src="js/angular-messages.js" type="text/javascript"></script>
+    <script src="js/angular-animate.js" type="text/javascript"></script>
+    <script src="js/angular-aria.min.js" type="text/javascript"></script>
+    <script src="js/angular-material.js" type="text/javascript"></script>
+    <script src="js/svg-assets-cache.js" type="text/javascript"></script>
+    <script src="js/app.js" type="text/javascript"></script>
+    <script src="js/ui-bootstrap-tpls-2.4.0.min.js" type="text/javascript"></script>
+</body>
+
+</html>

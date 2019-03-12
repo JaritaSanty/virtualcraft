@@ -1,0 +1,199 @@
+div.menualu {
+  background-color: rgba(21, 157, 235, 0.5);
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin:5px;
+}
+div.titulo {
+  font-family: Cooperplate Gothic Light;
+  color: #ffffff;
+  text-align: center;
+  size: 18px;
+  border: black 3px inset;
+  background-color: #062A74;
+  margin:5px;
+  -webkit-box-shadow: 5px 5px 5px #35383F;
+  -moz-box-shadow: 5px 5px 5px #35383F;
+}
+div.equipo {
+  font-family: Cooperplate Gothic Light;
+  color: #ffffff;
+  text-align: center;
+  size: 12px;
+  border: black 3px inset;
+  background-color: #FF9B00;
+  margin:1px;
+}
+img.equipo {
+  margin:5px;
+}
+div.tituloUsuario {
+  font-family: Cooperplate Gothic Light;
+  color: #ffffff;
+  text-align: center;
+  size: 18px;
+  border: black 5px double;
+  padding: 3px 10px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: #89140D;
+  margin:10px;
+  -webkit-box-shadow: 5px 5px 5px #35383F;
+  -moz-box-shadow: 5px 5px 5px #35383F;
+}
+div.tituloSimple {
+  font-family: Cooperplate Gothic Light;
+  color: #ffffff;
+  text-align: center;
+  size: 18px;
+  margin:5px;
+}
+div.nivel {
+  font-family: Cooperplate Gothic Light;
+  color: #000000;
+  text-align: center;
+  size: 18px;
+  border: black 3px inset;
+  background-color: #4EE715;
+  margin:1px;
+  -webkit-box-shadow: 5px 5px 5px #35383F;
+  -moz-box-shadow: 5px 5px 5px #35383F;
+}
+div.tituloPV {
+  font-family: Cooperplate Gothic Light;
+  color: #000000;
+  text-align: center;
+  size: 18px;
+  background-color: #255823;
+  margin:1px;
+  -webkit-box-shadow: 5px 5px 5px #35383F;
+  -moz-box-shadow: 5px 5px 5px #35383F;
+  border: black 3px inset;
+  border-radius: 10px;
+}
+div.puntosPV {
+  font-family: Cooperplate Gothic Light;
+  color: #000000;
+  text-align: center;
+  size: 18px;
+  background-color: #255823;
+  margin:1px;
+  -webkit-box-shadow: 5px 5px 5px #35383F;
+  -moz-box-shadow: 5px 5px 5px #35383F;
+  border: black 3px inset;
+  border-radius: 10px;
+}
+div.tituloPD {
+  font-family: Cooperplate Gothic Light;
+  color: #000000;
+  text-align: center;
+  size: 18px;
+  background-color: #1534E7;
+  margin:1px;
+  -webkit-box-shadow: 5px 5px 5px #35383F;
+  -moz-box-shadow: 5px 5px 5px #35383F;
+  border: black 3px inset;
+  border-radius: 10px;
+}
+div.puntosPD {
+  font-family: Cooperplate Gothic Light;
+  color: #000000;
+  text-align: center;
+  size: 18px;
+  background-color: #1534E7;
+  margin:1px;
+  -webkit-box-shadow: 5px 5px 5px #35383F;
+  -moz-box-shadow: 5px 5px 5px #35383F;
+  border: black 3px inset;
+  border-radius: 10px;
+}
+div.tituloPO {
+  font-family: Cooperplate Gothic Light;
+  color: #000000;
+  text-align: center;
+  size: 18px;
+  background-color: #E72E15;
+  margin:1px;
+  -webkit-box-shadow: 5px 5px 5px #35383F;
+  -moz-box-shadow: 5px 5px 5px #35383F;
+  border: black 3px inset;
+  border-radius: 10px;
+}
+div.puntosPO {
+  font-family: Cooperplate Gothic Light;
+  color: #000000;
+  text-align: center;
+  size: 18px;
+  background-color: #E72E15;
+  margin:1px;
+  -webkit-box-shadow: 5px 5px 5px #35383F;
+  -moz-box-shadow: 5px 5px 5px #35383F;
+  border: black 3px inset;
+  border-radius: 10px;
+}
+div.tituloPP {
+  font-family: Cooperplate Gothic Light;
+  color: #000000;
+  text-align: center;
+  size: 18px;
+  background-color: #DD15E7;
+  margin:1px;
+  -webkit-box-shadow: 5px 5px 5px #35383F;
+  -moz-box-shadow: 5px 5px 5px #35383F;
+  border: black 3px inset;
+  border-radius: 10px;
+}
+div.puntosPP {
+  font-family: Cooperplate Gothic Light;
+  color: #000000;
+  text-align: center;
+  size: 18px;
+  background-color: #DD15E7;
+  margin:1px;
+  -webkit-box-shadow: 5px 5px 5px #35383F;
+  -moz-box-shadow: 5px 5px 5px #35383F;
+  border: black 3px inset;
+  border-radius: 10px;
+}
+div.tituloFO {
+  font-family: Cooperplate Gothic Light;
+  color: #000000;
+  text-align: center;
+  size: 18px;
+  background-color: #E7AB15;
+  margin:1px;
+  -webkit-box-shadow: 5px 5px 5px #35383F;
+  -moz-box-shadow: 5px 5px 5px #35383F;
+  border: black 3px inset;
+  border-radius: 10px;
+}
+div.puntosFO {
+  font-family: Cooperplate Gothic Light;
+  color: #000000;
+  text-align: center;
+  size: 18px;
+  background-color: #E7AB15;
+  margin:1px;
+  -webkit-box-shadow: 5px 5px 5px #35383F;
+  -moz-box-shadow: 5px 5px 5px #35383F;
+  border: black 3px inset;
+  border-radius: 10px;
+}
+
+
+
+.table-fixed thead {
+  width: 97%;
+}
+.table-fixed tbody {
+  height: 150px;
+  overflow-y: auto;
+  width: 100%;
+}
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+  display: block;
+}
+.table-fixed tbody td, .table-fixed thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+}
