@@ -8,7 +8,7 @@ File:       db_config.php
 $DB_host = "localhost";
 $DB_user = "root";
 $DB_pass = "virtualcraft";
-$DB_name = "virtualcraftv2";
+$DB_name = "virtualcraftv2_test";
 //Connect with database
  try
  {
