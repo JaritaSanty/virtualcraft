@@ -22,9 +22,6 @@
               <th><a href="" ng-click="sortBy('pri_nombre')">Privilegi</a></th>
               <th><a href="" ng-click="sortBy('pri_descripcion')">Descripció</a></th>
               <th><a href="" ng-click="sortBy('niv_nombre')">Nivell</a></th>
-              <th><a href="" ng-click="sortBy('pri_aluPO')">PO (Alumne)</a></th>
-              <th><a href="" ng-click="sortBy('pri_equPV')">PV (Equip)</a></th>
-              <th><a href="" ng-click="sortBy('pri_equFO')">FO (Equip)</a></th>
               <th><a href="" ng-click="sortBy('pri_necesario1')">Requeriment</a></th>
               <th><a href="">Edita</a></th>
             </tr>
@@ -36,9 +33,6 @@
               <td>{{privilegioAbad.pri_nombre}}</td>
               <td>{{privilegioAbad.pri_descripcion}}</td>
               <td>{{privilegioAbad.niv_nombre}}</td>
-              <td>{{privilegioAbad.pri_aluPO}}</td>
-              <td>{{privilegioAbad.pri_equPV}}</td>
-              <td>{{privilegioAbad.pri_equFO}}</td>
               <td>Privilegis: {{privilegioAbad.pri_necesario1 == 0 ? '' : privilegioAbad.pri_necesario1}} {{privilegioAbad.pri_necesario2 == 0 ? '' : ' y ' + privilegioAbad.pri_necesario2}}</td>
               <td class="text-center">
                   <a title="Edita" ng-href="" ng-click="showEditarPrivilegios(ev,privilegioAbad);"><i class="glyphicon glyphicon-pencil"></i></a>
@@ -63,7 +57,7 @@
     </div>
     <div class="col-lg-12">
       <div class="container" style="background-color:#F5F5F5;">
-        <h1 class="text-center" style="font-family:Cooperplate Gothic Light;"><b>Privilegis Caballer/Amazona de la Classe {{curso.cla_nombre}}</b></h1>
+        <h1 class="text-center" style="font-family:Cooperplate Gothic Light;"><b>Privilegis Cavaller/Amazona de la Classe {{curso.cla_nombre}}</b></h1>
         <table id="tablePrivilegiosCaballeroAmazona" class="table table-bordered table-responsive">
           <thead>
             <tr>
@@ -72,9 +66,6 @@
               <th><a href="" ng-click="sortBy('pri_nombre')">Privilegi</a></th>
               <th><a href="" ng-click="sortBy('pri_descripcion')">Descripció</a></th>
               <th><a href="" ng-click="sortBy('niv_nombre')">Nivell</a></th>
-              <th><a href="" ng-click="sortBy('pri_aluPO')">PO (Alumne)</a></th>
-              <th><a href="" ng-click="sortBy('pri_equPV')">PV (Equip)</a></th>
-              <th><a href="" ng-click="sortBy('pri_equFO')">FO (Equip)</a></th>
               <th><a href="" ng-click="sortBy('pri_necesario1')">Requeriment</a></th>
               <th><a href="">Edita</a></th>
             </tr>
@@ -86,9 +77,6 @@
               <td>{{privilegioCaballero.pri_nombre}}</td>
               <td>{{privilegioCaballero.pri_descripcion}}</td>
               <td>{{privilegioCaballero.niv_nombre}}</td>
-              <td>{{privilegioCaballero.pri_aluPO}}</td>
-              <td>{{privilegioCaballero.pri_equPV}}</td>
-              <td>{{privilegioCaballero.pri_equFO}}</td>
               <td>Privilegis: {{privilegioCaballero.pri_necesario1 == 0 ? '' : privilegioCaballero.pri_necesario1}} {{privilegioCaballero.pri_necesario2 == 0 ? '' : ' y ' + privilegioCaballero.pri_necesario2}}</td>
               <td class="text-center">
                   <a title="Edita" ng-href="" ng-click="showEditarPrivilegios(ev,privilegioCaballero);"><i class="glyphicon glyphicon-pencil"></i></a>
@@ -122,9 +110,6 @@
               <th><a href="" ng-click="sortBy('pri_nombre')">Privilegi</a></th>
               <th><a href="" ng-click="sortBy('pri_descripcion')">Descripció</a></th>
               <th><a href="" ng-click="sortBy('niv_nombre')">Nivell</a></th>
-              <th><a href="" ng-click="sortBy('pri_aluPO')">PO (Alumne)</a></th>
-              <th><a href="" ng-click="sortBy('pri_equPV')">PV (Equip)</a></th>
-              <th><a href="" ng-click="sortBy('pri_equFO')">FO (Equip)</a></th>
               <th><a href="" ng-click="sortBy('pri_necesario1')">Requeriment</a></th>
               <th><a href="">Edita</a></th>
             </tr>
@@ -136,9 +121,6 @@
               <td>{{privilegioConde.pri_nombre}}</td>
               <td>{{privilegioConde.pri_descripcion}}</td>
               <td>{{privilegioConde.niv_nombre}}</td>
-              <td>{{privilegioConde.pri_aluPO}}</td>
-              <td>{{privilegioConde.pri_equPV}}</td>
-              <td>{{privilegioConde.pri_equFO}}</td>
               <td>Privilegis: {{privilegioConde.pri_necesario1 == 0 ? '' : privilegioConde.pri_necesario1}} {{privilegioConde.pri_necesario2 == 0 ? '' : ' y ' + privilegioConde.pri_necesario2}}</td>
               <td class="text-center">
                   <a title="Edita" ng-href="" ng-click="showEditarPrivilegios(ev,privilegioConde);"><i class="glyphicon glyphicon-pencil"></i></a>

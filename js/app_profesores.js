@@ -675,7 +675,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
         preserveScope:true
       }).then(function(answer) {
         if (answer.respuesta==="editar") {
-            var class_data='aluclaequ_id=' +answer.obj1.aluclaequ_id+'&rol_id=' +answer.obj1.rol_id+'&niv_id=1';
+            var class_data='aluclaequ_id=' +answer.obj1.aluclaequ_id+'&rol_id=' +answer.obj1.rol_id+'&niv_id='+answer.obj1.niv_id;
             $http({
                 method: 'POST',
                 url: '../srv/asignarRolNivelAlumno.php',
@@ -1483,7 +1483,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
         preserveScope:true
       }).then(function(answer) {
         if (answer.respuesta==="editar") {
-            var class_data='aluclaequ_id=' +answer.obj1.aluclaequ_id+'&rol_id=' +answer.obj1.rol_id+'&niv_id=1';
+            var class_data='aluclaequ_id=' +answer.obj1.aluclaequ_id+'&rol_id=' +answer.obj1.rol_id+'&niv_id='+answer.obj1.niv_id;
             $http({
                 method: 'POST',
                 url: '../srv/asignarRolNivelAlumno.php',
@@ -3088,7 +3088,7 @@ function($scope, $http, $cookies, $mdDialog) {
           preserveScope:true
       }).then(function(answer) {
         if (answer.respuesta==="editar") {
-          var post_data='pri_id=' +answer.privilegio.pri_id+'&pri_descripcion=' +answer.privilegio.pri_descripcion+'&pri_aluPO='+answer.privilegio.pri_aluPO+'&pri_equPV='+answer.privilegio.pri_equPV+'&pri_equFO='+answer.privilegio.pri_equFO+"&datosCurso="+JSON.stringify($scope.curso);
+          var post_data='pri_id=' +answer.privilegio.pri_id+'&pri_descripcion=' +answer.privilegio.pri_descripcion+'&pri_aluPV='+answer.privilegio.pri_aluPV+'&pri_aluPD='+answer.privilegio.pri_aluPD +'&pri_aluPO='+answer.privilegio.pri_aluPO +'&pri_aluPP='+answer.privilegio.pri_aluPP +'&pri_aluFO='+answer.privilegio.pri_aluFO+'&pri_equPV='+answer.privilegio.pri_equPV+'&pri_equPD='+answer.privilegio.pri_equPD+'&pri_equPO='+answer.privilegio.pri_equPO+'&pri_equPP='+answer.privilegio.pri_equPP+'&pri_equFO='+answer.privilegio.pri_equFO+'&pri_costPV='+answer.privilegio.pri_costPV+'&pri_costPD='+answer.privilegio.pri_costPD+'&pri_costPO='+answer.privilegio.pri_costPO+'&pri_costPP='+answer.privilegio.pri_costPP+'&pri_costFO='+answer.privilegio.pri_costFO+"&datosCurso="+JSON.stringify($scope.curso);
 
             $http({
                 method: 'POST',

@@ -26,7 +26,7 @@
                         <label style="font-family:Cooperplate Gothic Light;">Rol:</label>
                         <select class="form-control" ng-model="alumno.rol_id" ng-options="value.rol_id as value.rol_nombre for (key, value) in roles" style="font-family:Cooperplate Gothic Light;" required></select>
                     </div>
-                    <div class="col-xs-6 col-md-6" ng-hide="true">
+                    <div class="col-xs-6 col-md-6">
                         <label>Nivell:</label>
                         <select class="form-control"  ng-model="alumno.niv_id" ng-options="value.niv_id as value.niv_nombre for (key, value) in niveles" style="font-family:Cooperplate Gothic Light;" required></select>
                     </div>

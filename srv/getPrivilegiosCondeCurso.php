@@ -3,7 +3,7 @@ $obj = json_decode($_POST["datosCurso"]);
 $cla_id = $obj->cla_id;
 
 require_once 'db_config.php';
-$stmt = $DBcon->prepare("SELECT p.pri_id, p.rolniv_id, CONCAT(r.rol_nombre_masculino, ' / ', r.rol_nombre_femenino) AS pri_rol, n.niv_nombre, p.pri_nombre, p.pri_numero, p.pri_estado, i.img_ruta AS pri_imagen, p.pri_aluPO, p.pri_equPV, p.pri_equFO, p.pri_necesario1, p.pri_necesario2, p.pri_descripcion
+$stmt = $DBcon->prepare("SELECT p.pri_id, p.rolniv_id, CONCAT(r.rol_nombre_masculino, ' / ', r.rol_nombre_femenino) AS pri_rol, n.niv_nombre, p.pri_nombre, p.pri_numero, p.pri_estado, i.img_ruta AS pri_imagen, p.pri_aluPV, p.pri_aluPD, p.pri_aluPO, p.pri_aluPP, p.pri_aluFO, p.pri_equPV, p.pri_equPD, p.pri_equPO, p.pri_equPP, p.pri_equFO, p.pri_costPV, p.pri_costPD, p.pri_costPO, p.pri_costPP, p.pri_costFO, p.pri_necesario1, p.pri_necesario2, p.pri_descripcion
                           FROM privilegios AS p
                           INNER JOIN rolesniveles AS rn ON rn.rolniv_id = p.rolniv_id
                           INNER JOIN roles AS r ON r.rol_id = rn.rol_id
