@@ -19,7 +19,7 @@
 
         <md-dialog-content class="container-fluid">
             <div class="md-dialog-content">
-              <h2 class="text-center" style="font-family:Cooperplate Gothic Light;">{{privilegio.pri_rol + " - Nivel " + privilegio.niv_nombre}}</h2>
+              <h2 class="text-center" style="font-family:Cooperplate Gothic Light;">{{privilegio.pri_rol + " - Nivell " + privilegio.niv_nombre}}</h2>
               <h3 class="text-center" style="font-family:Cooperplate Gothic Light;">{{privilegio.pri_nombre}}</h3><br/>
                 <div class="row">
                     <div class="col-xs-6 col-md-6">
@@ -27,14 +27,14 @@
                       <img class="img-responsive pull-right" ng-src="../{{privilegio.pri_imagen}}" style="width:150px; height:150px;"/>
                     </div>
                     <div class="col-xs-6 col-md-6">
-                      <label style="font-family:Cooperplate Gothic Light;">DESCRIPCIÓN: </label>
+                      <label style="font-family:Cooperplate Gothic Light;">DESCRIPCIÓ: </label>
                       <textarea class="form-control" ng-model="privilegio.pri_descripcion" rows="4" style="font-family:Cooperplate Gothic Light;" required></textarea>
                     </div>
                 </div>
                 <hr/>
                 <div class="row">
                     <div class="col-xs-4 col-md-4">
-                      <label style="font-family:Cooperplate Gothic Light;">COSTO DEL PRIVILEGIO: </label>
+                      <label style="font-family:Cooperplate Gothic Light;">COST DEL PRIVILEGI:</label>
                       <div class="row">
                         <div class="col-xs-6 col-md-6">
                           <label style="font-family:Cooperplate Gothic Light;">PV:</label>
@@ -77,7 +77,7 @@
                       </div>
                     </div>
                     <div class="col-xs-4 col-md-4">
-                      <label style="font-family:Cooperplate Gothic Light;">PREMIO AL ALUMNO (AL COMPRARLO): </label>
+                      <label style="font-family:Cooperplate Gothic Light;">PUNTS D' UTILITZACIÓ PER A L'ALUMNE</label>
                       <div class="row">
                         <div class="col-xs-6 col-md-6">
                           <label style="font-family:Cooperplate Gothic Light;">PV:</label>
@@ -120,7 +120,7 @@
                       </div>
                     </div>
                     <div class="col-xs-4 col-md-4">
-                      <label style="font-family:Cooperplate Gothic Light;">PREMIO AL EQUIPO (AL COMPRARLO): </label>
+                      <label style="font-family:Cooperplate Gothic Light;">PUNTS PER A L'EQUIP</label>
                       <div class="row">
                         <div class="col-xs-6 col-md-6">
                           <label style="font-family:Cooperplate Gothic Light;">PV:</label>

@@ -27,7 +27,7 @@
     <div class="container" style="background-color:#F5F5F5;">
       <div class="col-xs-3 col-md-3">
         <a href="#/">
-          <img class="img-responsive" src="../images/logo.png" alt="Logo" width="100%">
+          <img class="img-responsive" src="../images/logo.png" alt="Logo" width="50%">
         </a>
       </div>
       <div class="col-xs-5 col-md-5">

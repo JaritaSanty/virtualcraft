@@ -14,7 +14,7 @@ $stmtAlumnosClase = $DBcon->prepare("SELECT ace.aluclaequ_id, ac.alucla_id, a.al
                                         ELSE 'Sense Assignar'
                                         END) AS rol_nombre,
                                       n.niv_id, n.niv_nombre, ace.aluclaequ_PV, ace.aluclaequ_PD, ace.aluclaequ_PO,
-                                      ace.aluclaequ_PP, ace.aluclaequ_PP, ace.aluclaequ_FO,
+                                      ace.aluclaequ_PP, ace.aluclaequ_PP, ace.aluclaequ_FO, ace.aluclaequ_PO_acc,
                                       IFNULL((SELECT p.pri_nombre
                                         FROM privilegiosejecutados AS pe
                                         INNER JOIN privilegios AS p ON p.pri_id = pe.pri_id

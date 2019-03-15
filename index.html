@@ -24,27 +24,31 @@
 </head>
 
 <body ng-controller="LoginController as angCtrl">
-  <img class="text-center" src="images/logo.png" width="25%"/>
-  <div class="content-w3ls" style="justify-content: center; align-items: center;">
-      <div class="content-bottom text-center">
-          <form ng-submit="angCtrl.loginForm()" method="post">
-            <div class="field-group">
-                <span class="fa fa-user" aria-hidden="true"></span>
-                <div class="wthree-field">
-                    <input ng-model="angCtrl.inputData.usuario" type="text" value="" placeholder="USUARI" required>
-                </div>
-            </div>
-            <div class="field-group">
-                <span class="fa fa-lock" aria-hidden="true"></span>
-                <div class="wthree-field">
-                    <input ng-model="angCtrl.inputData.password" type="Password" placeholder="CONTRASENYA" required>
-                </div>
-            </div>
-            <div class="wthree-field">
-                <input type="submit" value="ENTRADA" ng-disabled="myForm.$invalid"/>
-            </div>
-          </form>
-      </div>
+  <div class="row container">
+    <img class="pull-right" src="images/logo.png" width="13%"/>
+  </div>
+  <div class="row container">
+    <div class="content-w3ls" style="justify-content: center; align-items: center;">
+        <div class="content-bottom text-center">
+            <form ng-submit="angCtrl.loginForm()" method="post">
+              <div class="field-group">
+                  <span class="fa fa-user" aria-hidden="true"></span>
+                  <div class="wthree-field">
+                      <input ng-model="angCtrl.inputData.usuario" type="text" value="" placeholder="USUARI" required>
+                  </div>
+              </div>
+              <div class="field-group">
+                  <span class="fa fa-lock" aria-hidden="true"></span>
+                  <div class="wthree-field">
+                      <input ng-model="angCtrl.inputData.password" type="Password" placeholder="CONTRASENYA" required>
+                  </div>
+              </div>
+              <div class="wthree-field">
+                  <input type="submit" value="ENTRADA" ng-disabled="myForm.$invalid"/>
+              </div>
+            </form>
+        </div>
+    </div>
   </div>
   <div class="copyright text-center">
       <p>© 2019 Virtual Craft. Versión 2.0</p>
