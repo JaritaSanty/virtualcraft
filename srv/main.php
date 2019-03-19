@@ -95,6 +95,33 @@ function selectInfoAlumno($DBcon, $aluclaequ_id)
   $DBcon = null;
 }
 
+function selectNivelPP($DBcon, $PP)
+{
+  $stmt = $DBcon->prepare("SELECT niv_id, niv_nombre
+                          FROM niveles AS n
+                          WHERE n.niv_PP <=  :niv_PP
+                          ORDER BY niv_id DESC
+                          LIMIT 1");
+
+  $stmt->bindParam(':niv_PP', $PP, PDO::PARAM_INT);
+
+  try
+   {
+       $stmt->execute();
+   }
+   catch(PDOException $e)
+   {
+       return "ERROR : ".$e->getMessage();
+   }
+
+   $datos = json_encode(utf8ize($stmt->fetchAll()));
+   return $datos;
+
+  $stmt->closeCursor();
+  $stmt = null;
+  $DBcon = null;
+}
+
 //*******************************************************************************************
 //********************************* FUNCIONES INSERT ****************************************
 //*******************************************************************************************
@@ -202,6 +229,30 @@ function updatePP($DBcon, $aluclaequ_PP, $aluclaequ_id)
 
                             $stmt->bindParam(':aluclaequ_PP', $aluclaequ_PP, PDO::PARAM_INT);
                             $stmt->bindParam(':aluclaequ_id', $aluclaequ_id, PDO::PARAM_INT);
+
+  if ($stmt->execute()) {
+    return 'true';
+  } else {
+    return 'false';
+  }
+
+  $stmt->closeCursor();
+  $stmt = null;
+  $DBcon = null;
+}
+
+function updateNivelAlumno($DBcon, $aluclaequ_id, $rol_id, $niv_id)
+{
+  $stmt = $DBcon->prepare("UPDATE alumnosclasesequipos ace,
+                                    (SELECT rolniv_id, rolniv_PV, rolniv_PD, rolniv_PO, rolniv_PP, rolniv_FO
+                                      FROM rolesniveles
+                                      WHERE rol_id = :rol_id AND niv_id = :niv_id) rn
+                                  SET ace.rolniv_id = rn.rolniv_id
+                                  WHERE ace.aluclaequ_id = :aluclaequ_id ");
+
+  $stmt->bindParam(':aluclaequ_id', $aluclaequ_id, PDO::PARAM_STR);
+  $stmt->bindParam(':rol_id', $rol_id, PDO::PARAM_STR);
+  $stmt->bindParam(':niv_id', $niv_id, PDO::PARAM_STR);
 
   if ($stmt->execute()) {
     return 'true';

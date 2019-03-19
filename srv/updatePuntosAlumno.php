@@ -15,8 +15,13 @@ if ($stmt1 == "true" && $stmt2 == "true") {
   $PV = $obj[0]->aluclaequ_PV;
   $stmt3 = updatePP($DBcon, FLOOR($PO/500), $_POST['aluclaequ_id']);
 
+  $obj = json_decode(selectInfoAlumno($DBcon, $aluclaequ_id));
+  $PP = $obj[0]->aluclaequ_PP;
+  $niv = json_decode(selectNivelPP($DBcon, $PP));
+  $stmt4 = updateNivelAlumno($DBcon, $_POST['aluclaequ_id'], $obj[0]->rol_id, $niv[0]->niv_nombre);
+
   if($_POST['aluclaequ_aluPO']>0){
-    if($stmt3 == "true"){
+    if($stmt3 == "true" && $stmt4 == "true"){
       echo "true";
     }else{
       echo "false";
