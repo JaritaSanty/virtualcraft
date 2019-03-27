@@ -149,6 +149,56 @@ function insertLogProfesor($DBcon, $aluclaequ_id, $log_tipo, $log_PV, $log_PD, $
   $DBcon = null;
 }
 
+function insertLogProfesorEquipo($DBcon, $log_tipo, $log_PV, $log_PD, $log_PO, $log_PP, $log_FO, $log_descripcion, $equ_id)
+{
+  $stmt = $DBcon->prepare("INSERT INTO logprofesor (aluclaequ_id, log_tipo, log_PV, log_PD, log_PO, log_PP, log_FO, log_descripcion)
+                            SELECT ace.aluclaequ_id, :log_tipo, :aluclaequ_equPV, :aluclaequ_equPD, :aluclaequ_equPO, :aluclaequ_equPP, :aluclaequ_equFO, :log_descripcion
+                            FROM alumnosclasesequipos AS ace
+                            INNER JOIN alumnosclases AS ac ON ac.alucla_id = ace.alucla_id
+                            INNER JOIN alumnos AS a ON a.alu_id = ac.alu_id
+                            INNER JOIN usuarios AS u ON u.usu_id = a.usu_id
+                            INNER JOIN equipos AS e ON e.equ_id = ace.equ_id
+                            WHERE ace.aluclaequ_estado = 1 AND ace.equ_id = :equ_id;");
+
+  $stmt->bindParam(':log_tipo', $log_tipo, PDO::PARAM_STR);
+  $stmt->bindParam(':aluclaequ_equPV', $log_PV, PDO::PARAM_STR);
+  $stmt->bindParam(':aluclaequ_equPD', $log_PD, PDO::PARAM_STR);
+  $stmt->bindParam(':aluclaequ_equPO', $log_PO, PDO::PARAM_STR);
+  $stmt->bindParam(':aluclaequ_equPP', $log_PP, PDO::PARAM_STR);
+  $stmt->bindParam(':aluclaequ_equFO', $log_FO, PDO::PARAM_STR);
+  $stmt->bindParam(':log_descripcion', $log_descripcion, PDO::PARAM_STR);
+  $stmt->bindParam(':equ_id', $equ_id, PDO::PARAM_INT);;
+
+  if ($stmt->execute()) {
+    return "true";
+  } else {
+    return "false";
+  }
+
+  $stmt->closeCursor();
+  $stmt = null;
+  $DBcon = null;
+}
+
+function insertLogHistorialPuntos($DBcon, $aluclaequ_id)
+{
+  $stmt = $DBcon->prepare("INSERT INTO logprofesor (aluclaequ_id, log_tipo, log_PV, log_PD, log_PO, log_PP, log_FO)
+                            SELECT aluclaequ_id, 'historialpuntos', aluclaequ_PV, aluclaequ_PD, aluclaequ_PO, aluclaequ_PP, aluclaequ_FO
+                            FROM alumnosclasesequipos
+                            WHERE aluclaequ_id = :aluclaequ_id;");
+                            $stmt->bindParam(':aluclaequ_id', $aluclaequ_id, PDO::PARAM_INT);
+
+  if ($stmt->execute()) {
+    return "true";
+  } else {
+    return "false";
+  }
+
+  $stmt->closeCursor();
+  $stmt = null;
+  $DBcon = null;
+}
+
 function insertActuacionesEjecutadas($DBcon, $act_id, $aluclaequ_id)
 {
   $stmt = $DBcon->prepare("INSERT INTO actuacionesejecutadas (act_id, aluclaequ_id)
@@ -209,6 +259,51 @@ function sumarPuntosAlumno($DBcon, $aluclaequ_aluPV, $aluclaequ_aluPD, $aluclaeq
                             $stmt->bindParam(':aluclaequ_aluPP', $aluclaequ_aluPP, PDO::PARAM_INT);
                             $stmt->bindParam(':aluclaequ_aluFO', $aluclaequ_aluFO, PDO::PARAM_INT);
                             $stmt->bindParam(':aluclaequ_id', $aluclaequ_id, PDO::PARAM_INT);
+
+  if ($stmt->execute()) {
+    return 'true';
+  } else {
+    return 'false';
+  }
+
+  $stmt->closeCursor();
+  $stmt = null;
+  $DBcon = null;
+}
+
+function sumarPuntosEquipo($DBcon, $aluclaequ_equPV, $aluclaequ_equPD, $aluclaequ_equPO, $aluclaequ_equPP, $aluclaequ_equFO, $equ_id)
+{
+  $stmt = $DBcon->prepare("UPDATE alumnosclasesequipos
+                            SET aluclaequ_PV = CASE
+                                                    WHEN  (aluclaequ_PV + :aluclaequ_equPV) < 0 THEN 0
+                                                    WHEN  (aluclaequ_PV + :aluclaequ_equPV) > 100 THEN 100
+                                                    ELSE (aluclaequ_PV + :aluclaequ_equPV)
+                                                    END,
+                                aluclaequ_PD = CASE
+                                                    WHEN  (aluclaequ_PD + :aluclaequ_equPD) < 0 THEN 0
+                                                    WHEN  (aluclaequ_PD + :aluclaequ_equPD) > 100 THEN 100
+                                                    ELSE (aluclaequ_PD + :aluclaequ_equPD)
+                                                    END,
+                                aluclaequ_PO = CASE
+                                                    WHEN  (aluclaequ_PO + :aluclaequ_equPO) < 0 THEN 0
+                                                    ELSE (aluclaequ_PO + :aluclaequ_equPO)
+                                                    END,
+                                aluclaequ_PP = CASE
+                                                    WHEN  (aluclaequ_PP + :aluclaequ_equPP) < 0 THEN 0
+                                                    ELSE (aluclaequ_PP + :aluclaequ_equPP)
+                                                    END,
+                                aluclaequ_FO = CASE
+                                                    WHEN  (aluclaequ_FO + :aluclaequ_equFO) < 0 THEN 0
+                                                    ELSE (aluclaequ_FO + :aluclaequ_equFO)
+                                                    END
+                            WHERE aluclaequ_estado = 1 AND equ_id = :equ_id;");
+
+                            $stmt->bindParam(':aluclaequ_equPV', $aluclaequ_equPV, PDO::PARAM_STR);
+                            $stmt->bindParam(':aluclaequ_equPD', $aluclaequ_equPD, PDO::PARAM_STR);
+                            $stmt->bindParam(':aluclaequ_equPO', $aluclaequ_equPO, PDO::PARAM_STR);
+                            $stmt->bindParam(':aluclaequ_equPP', $aluclaequ_equPP, PDO::PARAM_STR);
+                            $stmt->bindParam(':aluclaequ_equFO', $aluclaequ_equFO, PDO::PARAM_STR);
+                            $stmt->bindParam(':equ_id', $equ_id, PDO::PARAM_INT);
 
   if ($stmt->execute()) {
     return 'true';
