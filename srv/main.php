@@ -122,6 +122,106 @@ function selectNivelPP($DBcon, $PP)
   $DBcon = null;
 }
 
+function selectIdAlumno($DBcon, $usu_nombre, $usu_apellido)
+{
+  $stmt = $DBcon->prepare("SELECT DISTINCT ace.aluclaequ_id
+                              FROM alumnosclasesequipos AS ace
+                              INNER JOIN alumnosclases AS ac ON ac.alucla_id = ace.alucla_id
+                              INNER JOIN alumnos AS a ON a.alu_id = ac.alu_id
+                              INNER JOIN usuarios AS u ON u.usu_id = a.usu_id
+                              WHERE ace.aluclaequ_estado = 1 AND u.usu_nombre = LOWER(LTRIM(RTRIM(:usu_nombre))) AND u.usu_apellido = LOWER(LTRIM(RTRIM(:usu_apellido)));");
+
+$stmt->bindParam(':usu_nombre',$usu_nombre, PDO::PARAM_STR);
+$stmt->bindParam(':usu_apellido',$usu_apellido, PDO::PARAM_STR);
+
+  try
+   {
+       $stmt->execute();
+   }
+   catch(PDOException $e)
+   {
+       return "ERROR : ".$e->getMessage();
+   }
+
+  // $datos = json_encode(utf8ize($stmt->fetchAll()));
+    $datos = $stmt->fetchAll();
+    foreach ($datos as $row) {
+        return $row["aluclaequ_id"];
+    }
+
+  $stmt->closeCursor();
+  $stmt = null;
+  $DBcon = null;
+}
+
+function selectAlumnoMV_00($DBcon, $usu_nombre, $usu_apellido)
+{
+  $stmt = $DBcon->prepare("SELECT DISTINCT CONCAT(u.usu_nombre, ' ', u.usu_apellido) AS aluclaequ_alumno,
+                            e.equ_nombre, (CASE WHEN u.usu_genero = 'Masculino' THEN r.rol_nombre_masculino
+                                                WHEN u.usu_genero = 'Femenino' THEN r.rol_nombre_femenino
+                                                ELSE 'Sense Assignar' END) AS rol_nombre,
+                            n.niv_nombre, ace.aluclaequ_PV, ace.aluclaequ_PD, ace.aluclaequ_PO, ace.aluclaequ_PP,
+                            ace.aluclaequ_FO
+                            FROM alumnosclasesequipos AS ace
+                            INNER JOIN alumnosclases AS ac ON ac.alucla_id = ace.alucla_id
+                            INNER JOIN alumnos AS a ON a.alu_id = ac.alu_id
+                            INNER JOIN usuarios AS u ON u.usu_id = a.usu_id
+                            INNER JOIN equipos AS e ON e.equ_id = ace.equ_id
+                            INNER JOIN rolesniveles AS rn ON rn.rolniv_id = ace.rolniv_id
+                            INNER JOIN roles AS r ON r.rol_id = rn.rol_id
+                            INNER JOIN niveles AS n ON n.niv_id = rn.niv_id
+                            WHERE ace.aluclaequ_estado = 1 AND u.usu_nombre = LOWER(LTRIM(RTRIM(:usu_nombre))) AND u.usu_apellido = LOWER(LTRIM(RTRIM(:usu_apellido)))");
+
+  $stmt->bindParam(':usu_nombre',$usu_nombre, PDO::PARAM_STR);
+  $stmt->bindParam(':usu_apellido',$usu_apellido, PDO::PARAM_STR);
+
+  try
+   {
+       $stmt->execute();
+   }
+   catch(PDOException $e)
+   {
+       return "ERROR : ".$e->getMessage();
+   }
+
+   $datos = json_encode(utf8ize($stmt->fetchAll()));
+   return $datos;
+
+  $stmt->closeCursor();
+  $stmt = null;
+  $DBcon = null;
+}
+
+function selectAlumnoMV_01($DBcon, $usu_nombre, $usu_apellido)
+{
+  $stmt = $DBcon->prepare("SELECT DISTINCT e.equ_nombre
+                            FROM alumnosclasesequipos AS ace
+                            INNER JOIN alumnosclases AS ac ON ac.alucla_id = ace.alucla_id
+                            INNER JOIN alumnos AS a ON a.alu_id = ac.alu_id
+                            INNER JOIN usuarios AS u ON u.usu_id = a.usu_id
+                            INNER JOIN equipos AS e ON e.equ_id = ace.equ_id
+                            WHERE ace.aluclaequ_estado = 1 AND u.usu_nombre = LOWER(LTRIM(RTRIM(:usu_nombre))) AND u.usu_apellido = LOWER(LTRIM(RTRIM(:usu_apellido)))");
+
+  $stmt->bindParam(':usu_nombre',$usu_nombre, PDO::PARAM_STR);
+  $stmt->bindParam(':usu_apellido',$usu_apellido, PDO::PARAM_STR);
+
+  try
+   {
+       $stmt->execute();
+   }
+   catch(PDOException $e)
+   {
+       return "ERROR : ".$e->getMessage();
+   }
+
+   $datos = json_encode(utf8ize($stmt->fetchAll()));
+   return $datos;
+
+  $stmt->closeCursor();
+  $stmt = null;
+  $DBcon = null;
+}
+
 //*******************************************************************************************
 //********************************* FUNCIONES INSERT ****************************************
 //*******************************************************************************************
@@ -211,6 +311,23 @@ function insertActuacionesEjecutadas($DBcon, $act_id, $aluclaequ_id)
     return 'true';
   } else {
     return 'false';
+  }
+
+  $stmt->closeCursor();
+  $stmt = null;
+  $DBcon = null;
+}
+
+function insertLogMV($DBcon, $usu_username)
+{
+  $stmt = $DBcon->prepare("INSERT INTO logMV (usu_username)
+                            VALUES(:usu_username);");
+                            $stmt->bindParam(':usu_username', $usu_username, PDO::PARAM_STR);
+
+  if ($stmt->execute()) {
+    return "true";
+  } else {
+    return "false";
   }
 
   $stmt->closeCursor();
@@ -348,6 +465,30 @@ function updateNivelAlumno($DBcon, $aluclaequ_id, $rol_id, $niv_id)
   $stmt->bindParam(':aluclaequ_id', $aluclaequ_id, PDO::PARAM_STR);
   $stmt->bindParam(':rol_id', $rol_id, PDO::PARAM_STR);
   $stmt->bindParam(':niv_id', $niv_id, PDO::PARAM_STR);
+
+  if ($stmt->execute()) {
+    return 'true';
+  } else {
+    return 'false';
+  }
+
+  $stmt->closeCursor();
+  $stmt = null;
+  $DBcon = null;
+}
+
+function updateAlumnoMV_01($DBcon, $usu_nombre, $usu_apellido, $aluclaequ_FO)
+{
+  $aluclaequ_id = selectIdAlumno($DBcon, $usu_nombre, $usu_apellido);
+  $stmt = $DBcon->prepare("UPDATE alumnosclasesequipos
+                            SET aluclaequ_FO = CASE
+                                                    WHEN :aluclaequ_FO < 0 THEN 0
+                                                    ELSE :aluclaequ_FO
+                                                    END
+                            WHERE aluclaequ_estado = 1 AND aluclaequ_id = :aluclaequ_id;");
+
+                            $stmt->bindParam(':aluclaequ_id', $aluclaequ_id, PDO::PARAM_STR);
+                            $stmt->bindParam(':aluclaequ_FO', $aluclaequ_FO, PDO::PARAM_INT);
 
   if ($stmt->execute()) {
     return 'true';
