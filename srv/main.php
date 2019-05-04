@@ -154,6 +154,38 @@ $stmt->bindParam(':usu_apellido',$usu_apellido, PDO::PARAM_STR);
   $DBcon = null;
 }
 
+function selectAlumnosEquipo($DBcon, $equ_id)
+{
+  $stmt = $DBcon->prepare("SELECT aluclaequ_id
+                              FROM alumnosclasesequipos
+                              WHERE aluclaequ_estado = 1 AND equ_id = :equ_id;");
+
+$stmt->bindParam(':equ_id',$equ_id, PDO::PARAM_INT);
+
+  try
+   {
+       $stmt->execute();
+   }
+   catch(PDOException $e)
+   {
+       return "ERROR : ".$e->getMessage();
+   }
+
+  // $datos = json_encode(utf8ize($stmt->fetchAll()));
+    $datos = $stmt->fetchAll();
+
+    $array = Array();
+    foreach($datos as $row){
+      $array[] = array($row["aluclaequ_id"]);
+    }
+
+    return $array;
+
+  $stmt->closeCursor();
+  $stmt = null;
+  $DBcon = null;
+}
+
 function selectAlumnoMV_00($DBcon, $usu_nombre, $usu_apellido)
 {
   $stmt = $DBcon->prepare("SELECT DISTINCT CONCAT(u.usu_nombre, ' ', u.usu_apellido) AS aluclaequ_alumno,

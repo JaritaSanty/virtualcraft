@@ -43,9 +43,10 @@
             <th><a href="" ng-click="sortBy('aluclaequ_PV')">PV</a></th>
             <th><a href="" ng-click="sortBy('aluclaequ_PD')">PD</a></th>
             <th><a href="" ng-click="sortBy('aluclaequ_PO')">PO</a></th>
+            <th><a href="" ng-click="sortBy('aluclaequ_PO_acc')">PO Acum</a></th>
             <th><a href=""ng-click="sortBy('aluclaequ_PP')">PP</a></th>
             <th><a href="" ng-click="sortBy('aluclaequ_FO')">FO</a></th>
-            <th><a href="" ng-click="sortBy('aluclaequ_FO')">Privilegi Utilizat</a></th>
+            <th><a href="" ng-click="sortBy('aluclaequ_privilegio')">Privilegi Utilizat</a></th>
             <th style="text-align:center;"><a href="">Accioni</a></th>
           </tr>
         </thead>
@@ -58,6 +59,7 @@
             <td>{{alumno.aluclaequ_PV}}</td>
             <td>{{alumno.aluclaequ_PD}}</td>
             <td>{{alumno.aluclaequ_PO}}</td>
+            <td>{{alumno.aluclaequ_PO_acc}}</td>
             <td>{{alumno.aluclaequ_PP}}</td>
             <td>{{alumno.aluclaequ_FO}}</td>
             <td>{{alumno.aluclaequ_privilegio}}</td>

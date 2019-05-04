@@ -2,8 +2,8 @@
 require_once 'db_config.php';
 include ('main.php');
 
-$log_descripcion = utf8_decode ($_POST['log_descripcion']);
-$log_tipo = 'puntosalumno';
+$log_descripcion = utf8_decode($_POST['log_descripcion']);
+$log_tipo = $_POST['aluclaequ_tipo'];
 $aluclaequ_id = $_POST['aluclaequ_id'];
 
 $stmt5 = insertLogHistorialPuntos($DBcon, $aluclaequ_id);
