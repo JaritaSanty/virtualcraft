@@ -3,7 +3,6 @@ require_once 'db_config.php';
 include ('main.php');
 
 $log_descripcion = utf8_decode($_POST['log_descripcion']);
-$log_tipo = $_POST['aluclaequ_tipo'];
 $equ_id = $_POST['equ_id'];
 
 $array = selectAlumnosEquipo($DBcon, $equ_id);
@@ -14,7 +13,7 @@ for($i=0; $i<count($array); $i++){
   $aluclaequ_id = $array[$i][0];
   $stmt5 = insertLogHistorialPuntos($DBcon, $aluclaequ_id);
   $stmt1 = sumarPuntosAlumno($DBcon, $_POST['aluclaequ_equPV'], $_POST['aluclaequ_equPD'], $_POST['aluclaequ_equPO'], $_POST['aluclaequ_equPP'], $_POST['aluclaequ_equFO'], $aluclaequ_id);
-  $stmt2 = insertLogProfesor($DBcon, $aluclaequ_id, $log_tipo, $_POST['aluclaequ_equPV'], $_POST['aluclaequ_equPD'], $_POST['aluclaequ_equPO'], $_POST['aluclaequ_equPP'], $_POST['aluclaequ_equFO'], $log_descripcion);
+  $stmt2 = insertLogProfesor($DBcon, $aluclaequ_id, 'puntosequipo', $_POST['aluclaequ_equPV'], $_POST['aluclaequ_equPD'], $_POST['aluclaequ_equPO'], $_POST['aluclaequ_equPP'], $_POST['aluclaequ_equFO'], $log_descripcion);
 
   if ($stmt1 == "true" && $stmt2 == "true" && $stmt5 == "true") {
     $obj = json_decode(selectInfoAlumno($DBcon, $aluclaequ_id));

@@ -3,12 +3,11 @@ require_once 'db_config.php';
 include ('main.php');
 
 $log_descripcion = utf8_decode($_POST['log_descripcion']);
-$log_tipo = $_POST['aluclaequ_tipo'];
 $aluclaequ_id = $_POST['aluclaequ_id'];
 
 $stmt5 = insertLogHistorialPuntos($DBcon, $aluclaequ_id);
 $stmt1 = sumarPuntosAlumno($DBcon, $_POST['aluclaequ_aluPV'], $_POST['aluclaequ_aluPD'], $_POST['aluclaequ_aluPO'], $_POST['aluclaequ_aluPP'], $_POST['aluclaequ_aluFO'], $_POST['aluclaequ_id']);
-$stmt2 = insertLogProfesor($DBcon, $aluclaequ_id, $log_tipo, $_POST['aluclaequ_aluPV'], $_POST['aluclaequ_aluPD'], $_POST['aluclaequ_aluPO'], $_POST['aluclaequ_aluPP'], $_POST['aluclaequ_aluFO'], $log_descripcion);
+$stmt2 = insertLogProfesor($DBcon, $aluclaequ_id, 'puntosalumno', $_POST['aluclaequ_aluPV'], $_POST['aluclaequ_aluPD'], $_POST['aluclaequ_aluPO'], $_POST['aluclaequ_aluPP'], $_POST['aluclaequ_aluFO'], $log_descripcion);
 
 if ($stmt1 == "true" && $stmt2 == "true" && $stmt5 == "true") {
   $obj = json_decode(selectInfoAlumno($DBcon, $aluclaequ_id));

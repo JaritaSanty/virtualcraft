@@ -728,7 +728,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
         preserveScope:true
       }).then(function(answer) {
         if (answer.respuesta==="editar") {
-            var class_data='aluclaequ_id=' +answer.obj1.aluclaequ_id+'&aluclaequ_aluPV=' +answer.obj1.aluclaequ_aluPV+'&aluclaequ_aluPD=' +answer.obj1.aluclaequ_aluPD+'&aluclaequ_aluPO=' +answer.obj1.aluclaequ_aluPO+'&aluclaequ_aluPP=' +answer.obj1.aluclaequ_aluPP+'&aluclaequ_aluFO=' +answer.obj1.aluclaequ_aluFO+'&log_descripcion=' +answer.obj1.log_descripcion+'&equ_id=' +answer.obj1.equ_id+'&aluclaequ_tipo=puntosalumno';;
+            var class_data='aluclaequ_id=' +answer.obj1.aluclaequ_id+'&aluclaequ_aluPV=' +answer.obj1.aluclaequ_aluPV+'&aluclaequ_aluPD=' +answer.obj1.aluclaequ_aluPD+'&aluclaequ_aluPO=' +answer.obj1.aluclaequ_aluPO+'&aluclaequ_aluPP=' +answer.obj1.aluclaequ_aluPP+'&aluclaequ_aluFO=' +answer.obj1.aluclaequ_aluFO+'&log_descripcion=' +answer.obj1.log_descripcion+'&equ_id=' +answer.obj1.equ_id;
             $http({
                 method: 'POST',
                 url: '../srv/updatePuntosAlumno.php',
@@ -781,7 +781,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
         preserveScope:true
       }).then(function(answer) {
         if (answer.respuesta==="sumar") {
-            var class_data='equ_id=' +answer.obj1.equ_id+'&aluclaequ_equPV=' +answer.obj1.aluclaequ_equPV+'&aluclaequ_equPD=' +answer.obj1.aluclaequ_equPD+'&aluclaequ_equPO=' +answer.obj1.aluclaequ_equPO+'&aluclaequ_equPP=' +answer.obj1.aluclaequ_equPP+'&aluclaequ_equFO=' +answer.obj1.aluclaequ_equFO+'&log_descripcion=' +answer.obj1.log_descripcion+'&aluclaequ_tipo=puntosequipo';
+            var class_data='equ_id=' +answer.obj1.equ_id+'&aluclaequ_equPV=' +answer.obj1.aluclaequ_equPV+'&aluclaequ_equPD=' +answer.obj1.aluclaequ_equPD+'&aluclaequ_equPO=' +answer.obj1.aluclaequ_equPO+'&aluclaequ_equPP=' +answer.obj1.aluclaequ_equPP+'&aluclaequ_equFO=' +answer.obj1.aluclaequ_equFO+'&log_descripcion=' +answer.obj1.log_descripcion;
             $http({
                 method: 'POST',
                 url: '../srv/updatePuntosEquipo.php',
@@ -1536,7 +1536,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
         preserveScope:true
       }).then(function(answer) {
         if (answer.respuesta==="editar") {
-            var class_data='aluclaequ_id=' +answer.obj1.aluclaequ_id+'&aluclaequ_aluPV=' +answer.obj1.aluclaequ_aluPV+'&aluclaequ_aluPD=' +answer.obj1.aluclaequ_aluPD+'&aluclaequ_aluPO=' +answer.obj1.aluclaequ_aluPO+'&aluclaequ_aluPP=' +answer.obj1.aluclaequ_aluPP+'&aluclaequ_aluFO=' +answer.obj1.aluclaequ_aluFO+'&log_descripcion=' +answer.obj1.log_descripcion+'&aluclaequ_tipo=puntosalumno';
+            var class_data='aluclaequ_id=' +answer.obj1.aluclaequ_id+'&aluclaequ_aluPV=' +answer.obj1.aluclaequ_aluPV+'&aluclaequ_aluPD=' +answer.obj1.aluclaequ_aluPD+'&aluclaequ_aluPO=' +answer.obj1.aluclaequ_aluPO+'&aluclaequ_aluPP=' +answer.obj1.aluclaequ_aluPP+'&aluclaequ_aluFO=' +answer.obj1.aluclaequ_aluFO+'&log_descripcion=' +answer.obj1.log_descripcion;
             $http({
                 method: 'POST',
                 url: '../srv/updatePuntosAlumno.php',
@@ -1589,7 +1589,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
         preserveScope:true
       }).then(function(answer) {
         if (answer.respuesta==="sumar") {
-            var class_data='equ_id=' +answer.obj1.equ_id+'&aluclaequ_equPV=' +answer.obj1.aluclaequ_equPV+'&aluclaequ_equPD=' +answer.obj1.aluclaequ_equPD+'&aluclaequ_equPO=' +answer.obj1.aluclaequ_equPO+'&aluclaequ_equPP=' +answer.obj1.aluclaequ_equPP+'&aluclaequ_equFO=' +answer.obj1.aluclaequ_equFO+'&log_descripcion=' +answer.obj1.log_descripcion+'&aluclaequ_tipo=puntosequipo';
+            var class_data='equ_id=' +answer.obj1.equ_id+'&aluclaequ_equPV=' +answer.obj1.aluclaequ_equPV+'&aluclaequ_equPD=' +answer.obj1.aluclaequ_equPD+'&aluclaequ_equPO=' +answer.obj1.aluclaequ_equPO+'&aluclaequ_equPP=' +answer.obj1.aluclaequ_equPP+'&aluclaequ_equFO=' +answer.obj1.aluclaequ_equFO+'&log_descripcion=' +answer.obj1.log_descripcion;
             $http({
                 method: 'POST',
                 url: '../srv/updatePuntosEquipo.php',
