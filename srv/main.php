@@ -509,6 +509,29 @@ function updateNivelAlumno($DBcon, $aluclaequ_id, $rol_id, $niv_id)
   $DBcon = null;
 }
 
+function updateAprobarTrabajo($DBcon, $trasig_id, $trasig_calificacion, $trasig_comentario)
+{
+  $stmt = $DBcon->prepare("UPDATE trabajosasignados
+                            SET trasig_aprobado_trabajo = 1,
+                                trasig_calificacion = :trasig_calificacion,
+                                trasig_comentario = :trasig_comentario
+                            WHERE trasig_id = :trasig_id;");
+
+                            $stmt->bindParam(':trasig_id', $trasig_id, PDO::PARAM_INT);
+                            $stmt->bindParam(':trasig_calificacion', $trasig_calificacion, PDO::PARAM_STR);
+                            $stmt->bindParam(':trasig_comentario', $trasig_comentario, PDO::PARAM_STR);
+
+  if ($stmt->execute()) {
+    return 'true';
+  } else {
+    return 'false';
+  }
+
+  $stmt->closeCursor();
+  $stmt = null;
+  $DBcon = null;
+}
+
 function updateAlumnoMV_01($DBcon, $usu_nombre, $usu_apellido, $aluclaequ_FO)
 {
   $aluclaequ_id = selectIdAlumno($DBcon, $usu_nombre, $usu_apellido);

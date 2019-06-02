@@ -6,11 +6,11 @@
 */
 ?>
 <!DOCTYPE html>
-<html lang="en" ng-app="AppProfesores">
+<html lang="es" ng-app="AppProfesores">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="robots" content="noindex">
-    <title>Virtual Craft VTouch</title>
+    <title>VIRTUAL CRAFT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../css/bootstrap.css" rel="stylesheet" />
     <link href="../css/bootstrap-theme.css" rel="stylesheet" />
@@ -31,7 +31,7 @@
         </a>
       </div>
       <div class="col-xs-5 col-md-5">
-        <h2 class="text-center" style="font-family:Cooperplate Gothic Light;color:#991309;"><b>VIRTUAL CRAFT VTOUCH</b></h2>
+        <h2 class="text-center" style="font-family:Cooperplate Gothic Light;color:#991309;"><b>VIRTUAL CRAFT</b></h2>
       </div>
       <div class="col-xs-4 col-md-4">
         <p class="navbar-text pull-right"><a href="javascript:history.back()"><< Tornar Enrere</a> <br/>Registrat com: <br/><b>{{usuario.usu_nombre + ' ' + usuario.usu_apellido}}</b> <br/><a href="../srv/logout.php">Tancar Sessió</a></p> <br/>

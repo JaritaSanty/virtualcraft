@@ -13,7 +13,7 @@
             <li><a href="" ng-click="showLog();">Log</a></li>
             <li><a href="" ng-click="showAleatorio();">Alumne / Equip - Aleatori</a></li>
             <li><a href="" ng-click="showCronometro();">Cronòmetre</a></li>
-            <li><a href="" ng-click="showTrabajosClase();">Treballs</a></li>
+            <li><a href="" ng-click="goAprobarTrabajos();">Treballs</a></li>
           </ul>
         </div>
       </p>

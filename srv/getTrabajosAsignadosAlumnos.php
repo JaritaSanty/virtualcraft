@@ -6,7 +6,8 @@ require_once 'db_config.php';
 $stmt = $DBcon->prepare("SELECT ta.trasig_id, ta.tra_id, t.tra_nombre, ta.aluclaequ_id,
                           CONCAT(u.usu_apellido, ' ', u.usu_nombre) AS aluclaequ_nombre, e.equ_nombre,
                           ta.trasig_titulo_trabajo, ta.trasig_texto_trabajo, ta.trasig_aprobado_trabajo,
-                          ta.trasig_fecha_insert, ta.trasig_fecha_update, ta.trasig_descripcion
+                          ta.trasig_calificacion, ta.trasig_comentario, ta.trasig_fecha_insert,
+                          ta.trasig_fecha_update, ta.trasig_descripcion
                           FROM trabajosasignados AS ta
                           INNER JOIN trabajos AS t ON t.tra_id = ta.tra_id
                           INNER JOIN alumnosclasesequipos AS ace ON ace.aluclaequ_id = ta.aluclaequ_id

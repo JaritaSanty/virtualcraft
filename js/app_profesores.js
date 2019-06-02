@@ -222,6 +222,10 @@ myApp.config(function($routeProvider) {
             templateUrl : 'trabajosCurso.php',
             controller  : 'TrabajosCursoController'
         })
+        .when('/aprobartrabajos', {
+            templateUrl : 'aprobarTrabajosCurso.php',
+            controller  : 'AprobarTrabajosCursoController'
+        })
         .when('/404', {
             templateUrl : '404.html'
         })
@@ -489,6 +493,10 @@ function($scope, $http, $cookies, $mdDialog, $location) {
   $scope.goEquiposCurso = function(curso) {
     $cookies.put('datosCurso', JSON.stringify(curso));
     $location.path('/equiposcurso');
+  }
+
+  $scope.goAprobarTrabajos = function(curso) {
+    $location.path('/aprobartrabajos');
   }
 
   $scope.showCronometro = function(ev) {
@@ -1297,6 +1305,10 @@ function($scope, $http, $cookies, $mdDialog, $location) {
   $scope.goEquiposCurso = function(curso) {
     $cookies.put('datosCurso', JSON.stringify(curso));
     $location.path('/equiposcurso');
+  }
+
+  $scope.goAprobarTrabajos = function(curso) {
+    $location.path('/aprobartrabajos');
   }
 
   $scope.showCronometro = function(ev) {
@@ -3185,4 +3197,144 @@ function($scope, $http, $cookies, $mdDialog) {
       x.respuesta = value;
       $mdDialog.hide(x);
   };
+}]);
+
+//*******************************************************************************************
+//**********************APROBAR TRABAJOS CURSO CONTROLLER************************************
+//*******************************************************************************************
+
+myApp.controller('AprobarTrabajosCursoController', ['$scope', '$http', '$cookies', '$mdDialog', '$location',
+function($scope, $http, $cookies, $mdDialog, $location) {
+  $scope.usuario = angular.fromJson($cookies.get('datosUsuario'));
+  $scope.curso = angular.fromJson($cookies.get('datosCurso'));
+
+  var class_data='trasig_aprobado_trabajo=0' + "&datosCurso="+JSON.stringify($scope.curso);
+
+  $http({
+    method: 'POST',
+    url: '../srv/getTrabajosAsignadosAlumnos.php',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    data: class_data
+  }).success(function(data) {
+    $scope.stasignados = data;
+    for(i=0; i<$scope.stasignados.length; i++){
+      if($scope.stasignados[i].trasig_aprobado_trabajo === "1"){$scope.stasignados[i].trasig_aprobado_trabajo = true;}else{$scope.stasignados[i].trasig_aprobado_trabajo = false;}
+    }
+    $scope.propertyName = 'trasig_id';
+    $scope.reverse = false;
+    $scope.sortBy = function(propertyName){
+        $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : true;
+        $scope.propertyName = propertyName;
+    };
+  });
+
+  $scope.goCursoProfesor = function(curso) {
+    $cookies.put('datosCurso', JSON.stringify(curso));
+    $location.path('/cursoprofesor');
+  }
+
+  $scope.showTrabajosClase = function(ev, alumno) {
+    $scope.stasignado = alumno;
+    $mdDialog.show({
+      templateUrl: '../web_profesores/popupTrabajosClase.php',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:false,
+      fullscreen: $scope.customFullscreen,
+      scope: $scope,
+      preserveScope:true
+    }).then(function(answer) {
+      if (answer.respuesta==="aprobar") {
+          var class_data='trasig_id=' +answer.obj1.trasig_id+'&aluclaequ_id=' +answer.obj1.aluclaequ_id+'&tra_nombre=' +answer.obj1.tra_nombre+'&tra_id=' +answer.obj1.tra_id+'&trasig_calificacion=' +answer.obj1.trasig_calificacion+'&trasig_comentario=' +answer.obj1.trasig_comentario;
+
+          $http({
+              method: 'POST',
+              url: '../srv/updateAprobarTrabajo.php',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              data: class_data
+          }).then(function(response) {
+              if(response.data === 'true'){
+                  $mdDialog.show(
+                      $mdDialog.alert()
+                      .clickOutsideToClose(false)
+                      .title('Información:')
+                      .textContent('Trabajo aprobado correctamente...!!!')
+                      .ariaLabel('Alert Dialog Demo')
+                      .ok('Aceptar')
+                      .targetEvent(ev)
+                  ).then(function() {
+                      location.reload(true);
+                  });
+              }else{
+                  $mdDialog.show(
+                      $mdDialog.alert()
+                      .clickOutsideToClose(false)
+                      .title('Advertencia:')
+                      .textContent('No se ha podido aprobar el trabajo...!!! Informe al administrador del Sistema')
+                      .ariaLabel('Alert Dialog Demo')
+                      .ok('Aceptar')
+                      .targetEvent(ev)
+                  );
+                  console.log(response);
+              }
+          });
+      }
+    });
+  };
+
+  $scope.CargarTablaTrabajosAsignados=function(aprobado)
+  {
+    if(aprobado == 0){
+      var class_data='trasig_aprobado_trabajo=0' + "&datosCurso="+JSON.stringify($scope.curso);
+      $http({
+        method: 'POST',
+        url: '../srv/getTrabajosAsignadosAlumnos.php',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        data: class_data
+      }).success(function(data) {
+        $scope.stasignados = data;
+        for(i=0; i<$scope.stasignados.length; i++){
+          if($scope.stasignados[i].trasig_aprobado_trabajo === "1"){$scope.stasignados[i].trasig_aprobado_trabajo = true;}else{$scope.stasignados[i].trasig_aprobado_trabajo = false;}
+        }
+        $scope.propertyName = 'trasig_id';
+        $scope.reverse = false;
+        $scope.sortBy = function(propertyName){
+            $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : true;
+            $scope.propertyName = propertyName;
+        };
+      });
+    }else if(aprobado == 1){
+      var class_data='trasig_aprobado_trabajo=1' + "&datosCurso="+JSON.stringify($scope.curso);
+      $http({
+        method: 'POST',
+        url: '../srv/getTrabajosAsignadosAlumnos.php',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        data: class_data
+      }).success(function(data) {
+        $scope.atasignados = data;
+        for(i=0; i<$scope.atasignados.length; i++){
+          if($scope.atasignados[i].trasig_aprobado_trabajo === "1"){$scope.atasignados[i].trasig_aprobado_trabajo = true;}else{$scope.atasignados[i].trasig_aprobado_trabajo = false;}
+        }
+        $scope.propertyName = 'trasig_id';
+        $scope.reverse = false;
+        $scope.sortBy = function(propertyName){
+            $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : true;
+            $scope.propertyName = propertyName;
+        };
+      });
+    }
+  };
+
+  $scope.cancel = function() {
+      $mdDialog.cancel();
+  };
+
+  $scope.answer = function(value, obj1, obj2) {
+      var x = {};
+      x.obj1 = obj1;
+      x.obj2 = obj2;
+      x.respuesta = value;
+      $mdDialog.hide(x);
+  };
+
 }]);

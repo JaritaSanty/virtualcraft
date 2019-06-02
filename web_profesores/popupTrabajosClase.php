@@ -22,7 +22,7 @@ font-size: 15px;
 </style>
 
 <md-dialog style="width: 80%" aria-label="Close dialog">
-    <form ng-cloak name="myForm" method="post" ng-controller="ProfesorCursoController">
+    <form ng-cloak name="myForm" method="post" ng-controller="AprobarTrabajosCursoController">
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2 style="font-family:Cooperplate Gothic Light;">Revisió de Treballs</h2>
@@ -35,83 +35,22 @@ font-size: 15px;
 
         <md-dialog-content class="container-fluid">
           <div class="md-dialog-content">
-            <uib-tabset class="nav nav-pills nav-justified container" active="activeJustified" justified="true" style="font-family:Cooperplate Gothic Light;">
-              <uib-tab index="0" heading="Sense Aprovar" ng-click="CargarTablaTrabajosAsignados('0')">
-                <br/>
-                <div class="row">
-                    <div class="col-xs-4 col-md-4"></div>
-                    <div class="col-xs-4 col-md-4">
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-                            <input class="form-control" type="text" ng-model="buscarNoAprobados" placeholder="Buscar" style="font-family:Cooperplate Gothic Light;">
-                        </div>
-                    </div>
-                    <div class="col-xs-4 col-md-4"></div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="col-xs-6 col-md-6" ng-repeat="stasignado in stasignados | orderBy:propertyName:reverse | filter:buscarNoAprobados">
-                      <div class="panel panel-primary">
-                        <div class="panel-heading">
-                          <h3 class="panel-title" style="font-family:Cooperplate Gothic Light;"><b class="text-center">{{stasignado.tra_nombre}}</b> <br/>{{stasignado.aluclaequ_nombre}} --> {{stasignado.equ_nombre}} </h3>
-                          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
-                        </div>
-                        <div class="panel-body">
-                          <h2 class="text-center" style="font-family:Cooperplate Gothic Light;">{{stasignado.trasig_titulo_trabajo}}</h2>
-                          <p class="text-justify" style="font-family:Cooperplate Gothic Light;">{{stasignado.trasig_texto_trabajo}}</p>
-                          <button ng-click="answer('aprobar',stasignado);" class="btn btn-success pull-right" ng-hide="stasignado.trasig_aprobado_trabajo">Aprovar</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </uib-tab>
-              <uib-tab index="1" heading="Aprovats" ng-click="CargarTablaTrabajosAsignados('1')">
-                <div class="row">
-                    <div class="col-xs-4 col-md-4"></div>
-                    <div class="col-xs-4 col-md-4">
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-                            <input class="form-control" type="text" ng-model="buscarAprobados" placeholder="Buscar" style="font-family:Cooperplate Gothic Light;">
-                        </div>
-                    </div>
-                    <div class="col-xs-4 col-md-4"></div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="col-xs-6 col-md-6" ng-repeat="atasignado in atasignados | orderBy:propertyName:reverse | filter:buscarAprobados">
-                      <div class="panel panel-primary">
-                        <div class="panel-heading">
-                          <h3 class="panel-title" style="font-family:Cooperplate Gothic Light;"><b class="text-center">{{atasignado.tra_nombre}}</b> <br/>{{atasignado.aluclaequ_nombre}} --> {{atasignado.equ_nombre}} </h3>
-                          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
-                        </div>
-                        <div class="panel-body">
-                          <h2 class="text-center" style="font-family:Cooperplate Gothic Light;">{{atasignado.trasig_titulo_trabajo}}</h2>
-                          <p class="text-justify" style="font-family:Cooperplate Gothic Light;">{{atasignado.trasig_texto_trabajo}}</p>
-                          <button ng-click="answer('aprobar',atasignado);" class="btn btn-success pull-right" ng-hide="atasignado.trasig_aprobado_trabajo">Aprovar</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </uib-tab>
-            </uib-tabset>
+            <div class="row">
+              <h3 style="font-family:Cooperplate Gothic Light;"><b>Treball:</b> {{stasignado.tra_nombre}}<br><b>Estudiant:</b> {{stasignado.aluclaequ_nombre}}<br><b>Títol:</b> {{stasignado.trasig_titulo_trabajo}}</h3>
+              <p class="text-justify" style="font-family:Cooperplate Gothic Light;">{{stasignado.trasig_texto_trabajo}}</p>
+            </div>
+            <div class="row">
+              <div class="col-xs-4 col-md-4">
+                  <label style="font-family:Cooperplate Gothic Light;">Qualificació:</label>
+                  <input class="form-control" string-to-number ng-model="stasignado.trasig_calificacion" type="number" style="font-family:Cooperplate Gothic Light;" required ng-disabled="stasignado.trasig_aprobado_trabajo"/><br/>
+                  <button ng-click="answer('aprobar',stasignado);" class="btn btn-success" ng-disabled="myForm.$invalid" ng-hide="stasignado.trasig_aprobado_trabajo">Aprovat</button>
+              </div>
+              <div class="col-xs-8 col-md-8">
+                <label style="font-family:Cooperplate Gothic Light;">Comentari:</label>
+                <textarea class="form-control" ng-model="stasignado.trasig_comentario" rows="4" style="font-family:Cooperplate Gothic Light;" required ng-disabled="stasignado.trasig_aprobado_trabajo"></textarea>
+              </div>
+            </div>
           </div>
         </md-dialog-content>
     </form>
 </md-dialog>
-
-<script>
-$(document).on('click', '.panel-heading span.clickable', function(e){
-    var $this = $(this);
-	if(!$this.hasClass('panel-collapsed')) {
-		$this.parents('.panel').find('.panel-body').slideUp();
-		$this.addClass('panel-collapsed');
-		$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
-	} else {
-		$this.parents('.panel').find('.panel-body').slideDown();
-		$this.removeClass('panel-collapsed');
-		$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
-	}
-})
-</script>
