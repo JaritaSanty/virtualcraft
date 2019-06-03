@@ -36,7 +36,7 @@
                   <td>{{stasignado.aluclaequ_nombre}}</td>
                   <td>{{stasignado.equ_nombre}}</td>
                   <td class="text-center">
-                    <button ng-click="showTrabajosClase(ev, stasignado);" class="btn btn-success pull-right" ng-hide="stasignado.trasig_aprobado_trabajo">Qualificar</button>
+                    <button ng-click="showTrabajosClase(ev, stasignado);" class="btn btn-success" ng-hide="stasignado.trasig_aprobado_trabajo">Qualificar</button>
                   </td>
                 </tr>
               </tbody>
@@ -73,7 +73,7 @@
                   <td>{{atasignado.aluclaequ_nombre}}</td>
                   <td>{{atasignado.equ_nombre}}</td>
                   <td class="text-center">
-                    <button ng-click="showTrabajosClase(ev, atasignado);" class="btn btn-success pull-right">Veure</button>
+                    <button ng-click="showTrabajosClase(ev, atasignado);" class="btn btn-success">Veure</button>
                   </td>
                 </tr>
               </tbody>

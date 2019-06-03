@@ -886,7 +886,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
       preserveScope:true
     }).then(function(answer) {
       if (answer.respuesta==="premio") {
-          var class_data='aluclaequ_id=' +answer.obj1.aluclaequ_id+'&act_id=' +answer.obj2.act_id+'&act_PV=' +answer.obj2.act_PV+'&act_PD=' +answer.obj2.act_PD+'&act_PO=' +answer.obj2.act_PO+'&act_PP=' +answer.obj2.act_PP+'&act_FO=' +answer.obj2.act_FO+ "&datosCurso="+JSON.stringify($scope.curso);
+          var class_data='aluclaequ_id=' +answer.obj1.aluclaequ_id+'&act_id=' +answer.obj2.act_id+'&act_PV=' +answer.obj2.act_PV+'&act_PD=' +answer.obj2.act_PD+'&act_PO=' +answer.obj2.act_PO+'&act_PP=' +answer.obj2.act_PP+'&act_FO=' +answer.obj2.act_FO+'&equ_id=' +answer.obj1.equ_id+ "&datosCurso="+JSON.stringify($scope.curso);
 
           $http({
               method: 'POST',
@@ -951,7 +951,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
       preserveScope:true
     }).then(function(answer) {
       if (answer.respuesta==="castigo") {
-          var class_data='aluclaequ_id=' +answer.obj1.aluclaequ_id+'&act_id=' +answer.obj2.act_id+'&act_PV=' +answer.obj2.act_PV+'&act_PD=' +answer.obj2.act_PD+'&act_PO=' +answer.obj2.act_PO+'&act_PP=' +answer.obj2.act_PP+'&act_FO=' +answer.obj2.act_FO+"&datosCurso="+JSON.stringify($scope.curso);
+          var class_data='aluclaequ_id=' +answer.obj1.aluclaequ_id+'&act_id=' +answer.obj2.act_id+'&act_PV=' +answer.obj2.act_PV+'&act_PD=' +answer.obj2.act_PD+'&act_PO=' +answer.obj2.act_PO+'&act_PP=' +answer.obj2.act_PP+'&act_FO=' +answer.obj2.act_FO+'&equ_id=' +answer.obj1.equ_id+"&datosCurso="+JSON.stringify($scope.curso);
 
           $http({
               method: 'POST',
@@ -1698,7 +1698,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
       preserveScope:true
     }).then(function(answer) {
       if (answer.respuesta==="premio") {
-          var class_data='aluclaequ_id=' +answer.obj1.aluclaequ_id+'&act_id=' +answer.obj2.act_id+'&act_PV=' +answer.obj2.act_PV+'&act_PD=' +answer.obj2.act_PD+'&act_PO=' +answer.obj2.act_PO+'&act_PP=' +answer.obj2.act_PP+'&act_FO=' +answer.obj2.act_FO+ "&datosCurso="+JSON.stringify($scope.curso);
+          var class_data='aluclaequ_id=' +answer.obj1.aluclaequ_id+'&act_id=' +answer.obj2.act_id+'&act_PV=' +answer.obj2.act_PV+'&act_PD=' +answer.obj2.act_PD+'&act_PO=' +answer.obj2.act_PO+'&act_PP=' +answer.obj2.act_PP+'&act_FO=' +answer.obj2.act_FO+'&equ_id=' +answer.obj1.equ_id+ "&datosCurso="+JSON.stringify($scope.curso);
 
           $http({
               method: 'POST',
@@ -1763,7 +1763,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
       preserveScope:true
     }).then(function(answer) {
       if (answer.respuesta==="castigo") {
-          var class_data='aluclaequ_id=' +answer.obj1.aluclaequ_id+'&act_id=' +answer.obj2.act_id+'&act_PV=' +answer.obj2.act_PV+'&act_PD=' +answer.obj2.act_PD+'&act_PO=' +answer.obj2.act_PO+'&act_PP=' +answer.obj2.act_PP+'&act_FO=' +answer.obj2.act_FO+"&datosCurso="+JSON.stringify($scope.curso);
+          var class_data='aluclaequ_id=' +answer.obj1.aluclaequ_id+'&act_id=' +answer.obj2.act_id+'&act_PV=' +answer.obj2.act_PV+'&act_PD=' +answer.obj2.act_PD+'&act_PO=' +answer.obj2.act_PO+'&act_PP=' +answer.obj2.act_PP+'&act_FO=' +answer.obj2.act_FO+'&equ_id=' +answer.obj1.equ_id+"&datosCurso="+JSON.stringify($scope.curso);
 
           $http({
               method: 'POST',
@@ -3217,6 +3217,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
     data: class_data
   }).success(function(data) {
     $scope.stasignados = data;
+
     for(i=0; i<$scope.stasignados.length; i++){
       if($scope.stasignados[i].trasig_aprobado_trabajo === "1"){$scope.stasignados[i].trasig_aprobado_trabajo = true;}else{$scope.stasignados[i].trasig_aprobado_trabajo = false;}
     }
@@ -3245,7 +3246,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
       preserveScope:true
     }).then(function(answer) {
       if (answer.respuesta==="aprobar") {
-          var class_data='trasig_id=' +answer.obj1.trasig_id+'&aluclaequ_id=' +answer.obj1.aluclaequ_id+'&tra_nombre=' +answer.obj1.tra_nombre+'&tra_id=' +answer.obj1.tra_id+'&trasig_calificacion=' +answer.obj1.trasig_calificacion+'&trasig_comentario=' +answer.obj1.trasig_comentario;
+          var class_data='trasig_id=' +answer.obj1.trasig_id+'&aluclaequ_id=' +answer.obj1.aluclaequ_id+'&tra_nombre=' +answer.obj1.tra_nombre+'&tra_id=' +answer.obj1.tra_id+'&trasig_calificacion=' +answer.obj1.trasig_calificacion+'&trasig_comentario=' +answer.obj1.trasig_comentario+'&tra_PV=' +answer.obj1.tra_PV+'&tra_PD=' +answer.obj1.tra_PD+'&tra_PO=' +answer.obj1.tra_PO+'&tra_PP=' +answer.obj1.tra_PP+'&tra_FO=' +answer.obj1.tra_FO+'&equ_id=' +answer.obj1.equ_id;
 
           $http({
               method: 'POST',

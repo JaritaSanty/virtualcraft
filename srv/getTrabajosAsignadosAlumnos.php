@@ -3,7 +3,8 @@ $obj = json_decode($_POST["datosCurso"]);
 $cla_id = $obj->cla_id;
 
 require_once 'db_config.php';
-$stmt = $DBcon->prepare("SELECT ta.trasig_id, ta.tra_id, t.tra_nombre, ta.aluclaequ_id,
+$stmt = $DBcon->prepare("SELECT ta.trasig_id, ta.tra_id, t.tra_nombre, t.tra_PV, t.tra_PD, t.tra_PO,
+                          t.tra_PP, t.tra_FO, ta.aluclaequ_id, ace.equ_id,
                           CONCAT(u.usu_apellido, ' ', u.usu_nombre) AS aluclaequ_nombre, e.equ_nombre,
                           ta.trasig_titulo_trabajo, ta.trasig_texto_trabajo, ta.trasig_aprobado_trabajo,
                           ta.trasig_calificacion, ta.trasig_comentario, ta.trasig_fecha_insert,
