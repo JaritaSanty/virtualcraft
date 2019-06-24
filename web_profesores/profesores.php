@@ -1,4 +1,4 @@
-<div class="container" style="background-color:#F5F5F5;">
+<div class="container">
   <div class="row">
     <div class="col-xs-12 col-md-12">
       <h1 class="text-center" style="font-family:Cooperplate Gothic Light;"><b>Les Meves Classes</b></h1>

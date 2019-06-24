@@ -3,11 +3,12 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="robots" content="noindex">
-    <title>Virtual Craft VTouch</title>
+    <title>Virtual Craft</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../css/bootstrap.css" rel="stylesheet" />
     <link href="../css/bootstrap-theme.css" rel="stylesheet" />
     <link href="../css/angular-material.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="../css/style_alumno.css" type="text/css" media="all">
     <link rel="stylesheet" href="../css/style.css" type="text/css" media="all">
   </head>
   <body ng-controller="AlumnosController" style="background-color:#ed7a15;" background="../images/fondo.jpg" backgroun-repeat: repeat; width=100%; height=100%;>
@@ -19,11 +20,12 @@
       </div>
       <div class="col-xs-8 col-md-8">
         <h1 class="text-center" style="font-family:Cooperplate Gothic Light; color:#991309; font-size:40px;"><b>¡Hola {{usuario.usu_nombre + ' ' + usuario.usu_apellido}}!</b></h1>
-        <h2 class="text-center" style="font-family:Cooperplate Gothic Light;color:#991309; font-size:28px;"><b>¡Benvingut/a a Virtual Craft VTouch!</b></h2>      </div>
+        <h2 class="text-center" style="font-family:Cooperplate Gothic Light;color:#991309; font-size:28px;"><b>¡Benvingut/a a Virtual Craft!</b></h2>      </div>
     </div>
-    <h3 class="container" style="font-family:Cooperplate Gothic Light;color:#991309; font-size:20px;">Selecciona la classe en què vols jugar: </h3>
     <br/>
-    <div class="container">
+    <div class="container menualu">
+      <h3 class="container" style="font-family:Cooperplate Gothic Light;color:#991309; font-size:20px;"><b>Selecciona la classe en què vols jugar: </b></h3>
+      <br/>
       <div class="row">
         <div class="col-xs-4 col-md-3 text-center" ng-repeat="curso in cursos">
           <a href="" ng-click="goPanelAlumno(curso);">

@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-xs-12 col-md-12">
                         <label style="font-family:Cooperplate Gothic Light;">Descripció:</label>
-                        <textarea class="form-control" ng-model="trabajo.tra_descripcion" rows="3" style="font-family:Cooperplate Gothic Light;" required></textarea>
+                        <textarea class="form-control" ng-model="trabajo.tra_descripcion" rows="8" style="font-family:Cooperplate Gothic Light;" required></textarea>
                     </div>
                 </div>
                 <br/>

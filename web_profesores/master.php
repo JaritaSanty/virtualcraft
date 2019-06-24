@@ -6,7 +6,7 @@
 */
 ?>
 <!DOCTYPE html>
-<html lang="es" ng-app="AppProfesores">
+<html lang="ca" ng-app="AppProfesores">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="robots" content="noindex">

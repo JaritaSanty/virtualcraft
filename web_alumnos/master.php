@@ -6,11 +6,11 @@
 */
 ?>
 <!DOCTYPE html>
-<html lang="en" ng-app="AppAlumnos">
+<html lang="ca" ng-app="AppAlumnos">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="robots" content="noindex">
-    <title>Virtual Craft VTouch</title>
+    <title>Virtual Craft</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../css/bootstrap.css" rel="stylesheet" />
     <link href="../css/bootstrap-theme.css" rel="stylesheet" />
@@ -28,7 +28,7 @@
     <div class="row">
       <div class="col-xs-6 col-md-4">
         <div class="menualu">
-          <div class="tituloUsuario"><b>{{usuario.usu_nombre | Capitalize}} {{usuario.usu_apellido | Capitalize}}</b></div>
+          <div class="tituloUsuario"><b>{{alumno.rol_nombre | uppercase}}: {{usuario.usu_nombre | uppercase}} {{usuario.usu_apellido | uppercase}}</b></div>
           <div class="titulo"><b>{{alumno.cla_nombre}}</b></div>
           <div class="titulo"><b>{{alumno.equ_nombre}}</b></div>
           <div class="row">
@@ -63,7 +63,7 @@
               <div class="puntosFO"><b>{{alumno.aluclaequ_FO}}</b></div>
             </div>
             <div class="col-xs-6 col-md-12">
-              <div class="nivel"><b>NIVEL {{alumno.niv_nombre}}</b></div>
+              <div class="nivel"><b>NIVELL {{alumno.niv_nombre}}</b></div>
             </div>
           </div>
           <br/>
@@ -74,7 +74,7 @@
               </a>
             </div>
             <div class="col-xs-3 col-md-6">
-              <a href="#/">
+              <a href="#/privilegios">
                 <img class="img-responsive" src="../images/privilegis.png" alt="Privilegis">
               </a>
             </div>
@@ -106,11 +106,11 @@
           </div>
           <div class="col-xs-6 col-md-5">
             <a href="../web_alumnos/alumnos.php">
-              <img class="img-responsive" ng-src="../images/logo.png" alt="Logo">
+              <img class="img-responsive" ng-src="../images/logo.png" alt="Logo" width="50%">
             </a>
           </div>
         </div>
-        <div class="row" ng-view>
+        <div class="row menualu" ng-view>
         </div>
       </div>
     </div>

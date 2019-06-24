@@ -2,7 +2,7 @@ div.menualu {
   background-color: rgba(21, 157, 235, 0.5);
   padding: 3px 10px;
   border-radius: 20px;
-  margin:5px;
+  margin:0px;
 }
 div.titulo {
   font-family: Cooperplate Gothic Light;
@@ -180,7 +180,57 @@ div.puntosFO {
   border-radius: 10px;
 }
 
+div.privactivo {
+  font-family: Cooperplate Gothic Light;
+  color: #ffffff;
+  text-align: center;
+  size: 10px;
+  border: black 2px inset;
+  background-color: #49A617;
+  margin:0px;
+  height: 120px;
+}
 
+div.privdesactivo {
+  font-family: Cooperplate Gothic Light;
+  color: #ffffff;
+  text-align: center;
+  size: 10px;
+  border: black 2px inset;
+  background-color: #8D8E8C;
+  margin:0px;
+  height: 120px;
+}
+
+div.privcaballero {
+  font-family: Cooperplate Gothic Light;
+  color: #ffffff;
+  text-align: center;
+  size: 10px;
+  border: black 2px inset;
+  background-color: #5BB4DE;
+  margin:0px;
+}
+
+div.privabad {
+  font-family: Cooperplate Gothic Light;
+  color: #ffffff;
+  text-align: center;
+  size: 10px;
+  border: black 2px inset;
+  background-color: #984ECF;
+  margin:0px;
+}
+
+div.privnivel {
+  font-family: Cooperplate Gothic Light;
+  color: #ffffff;
+  text-align: center;
+  border: black 2px inset;
+  background-color: #FF9B00;
+  margin:0px;
+  height: 20px;
+}
 
 .table-fixed thead {
   width: 97%;

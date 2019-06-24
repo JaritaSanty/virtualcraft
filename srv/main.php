@@ -367,6 +367,26 @@ function insertLogMV($DBcon, $usu_username)
   $DBcon = null;
 }
 
+function insertPrivilegiosEjecutados($DBcon, $pri_id, $aluclaequ_id, $prieje_tipo)
+{
+  $stmt = $DBcon->prepare("INSERT INTO privilegiosejecutados (pri_id, aluclaequ_id, prieje_tipo)
+                          VALUES(:pri_id, :aluclaequ_id, :prieje_tipo)");
+
+                          $stmt->bindParam(':aluclaequ_id', $aluclaequ_id, PDO::PARAM_STR);
+                          $stmt->bindParam(':pri_id', $pri_id, PDO::PARAM_STR);
+                          $stmt->bindParam(':prieje_tipo', $prieje_tipo, PDO::PARAM_STR);
+
+  if ($stmt->execute()) {
+    return 'true';
+  } else {
+    return 'false';
+  }
+
+  $stmt->closeCursor();
+  $stmt = null;
+  $DBcon = null;
+}
+
 //*******************************************************************************************
 //********************************* FUNCIONES UPDATE ****************************************
 //*******************************************************************************************
@@ -532,6 +552,28 @@ function updateAprobarTrabajo($DBcon, $trasig_id, $trasig_calificacion, $trasig_
   $DBcon = null;
 }
 
+function updateGuardarTrabajo($DBcon, $trasig_id, $trasig_titulo_trabajo, $trasig_texto_trabajo)
+{
+  $stmt = $DBcon->prepare("UPDATE trabajosasignados
+                            SET trasig_titulo_trabajo = :trasig_titulo_trabajo,
+                                trasig_texto_trabajo = :trasig_texto_trabajo
+                            WHERE trasig_id = :trasig_id;");
+
+                            $stmt->bindParam(':trasig_id', $trasig_id, PDO::PARAM_INT);
+                            $stmt->bindParam(':trasig_titulo_trabajo', $trasig_titulo_trabajo, PDO::PARAM_STR);
+                            $stmt->bindParam(':trasig_texto_trabajo', $trasig_texto_trabajo, PDO::PARAM_STR);
+
+  if ($stmt->execute()) {
+    return 'true';
+  } else {
+    return 'false';
+  }
+
+  $stmt->closeCursor();
+  $stmt = null;
+  $DBcon = null;
+}
+
 function updateAlumnoMV_01($DBcon, $usu_nombre, $usu_apellido, $aluclaequ_FO)
 {
   $aluclaequ_id = selectIdAlumno($DBcon, $usu_nombre, $usu_apellido);
@@ -595,5 +637,54 @@ function updatePuntosAlumno($DBcon, $aluclaequ_id, $sumPV, $sumPD, $sumPO, $sumP
   } else {
     return "false";
   }
+}
+
+function updatePuntosEquipo($DBcon, $equ_id, $aluclaequ_PV, $aluclaequ_PD, $aluclaequ_PO, $aluclaequ_PP, $aluclaequ_FO, $log_descripcion)
+{
+  $array = selectAlumnosEquipo($DBcon, $equ_id);
+
+  $resultado = "false";
+
+  for($i=0; $i<count($array); $i++){
+    $aluclaequ_id = $array[$i][0];
+    $stmt5 = insertLogHistorialPuntos($DBcon, $aluclaequ_id);
+    $stmt1 = sumarPuntosAlumno($DBcon, $aluclaequ_PV, $aluclaequ_PD, $aluclaequ_PO, $aluclaequ_PP, $aluclaequ_FO, $aluclaequ_id);
+    $stmt2 = insertLogProfesor($DBcon, $aluclaequ_id, 'puntosequipo', $aluclaequ_PV, $aluclaequ_PD, $aluclaequ_PO, $aluclaequ_PP, $aluclaequ_FO, $log_descripcion);
+
+    if ($stmt1 == "true" && $stmt2 == "true" && $stmt5 == "true") {
+      $obj = json_decode(selectInfoAlumno($DBcon, $aluclaequ_id));
+      $PV = $obj[0]->aluclaequ_PV;
+      if($aluclaequ_PO>0){
+        $PO = $obj[0]->aluclaequ_PO_acc;
+
+        $stmt3 = updatePP($DBcon, FLOOR($PO/500), $aluclaequ_id);
+
+        $obj = json_decode(selectInfoAlumno($DBcon, $aluclaequ_id));
+        $PP = $obj[0]->aluclaequ_PP;
+        $niv = json_decode(selectNivelPP($DBcon, $PP));
+        $stmt4 = updateNivelAlumno($DBcon, $aluclaequ_id, $obj[0]->rol_id, $niv[0]->niv_nombre);
+
+        if($stmt3 == "true" && $stmt4 == "true"){
+          $resultado = "true";
+        }else{
+          $resultado = "false";
+        }
+      }else if(($aluclaequ_PV>0 || $aluclaequ_PV<0) && $PV <= 0){
+        $stmt6 = sumarPuntosEquipo($DBcon, -10, 0, 0, 0, 0, $equ_id);
+        $stmt7 = insertLogProfesorEquipo($DBcon, 'puntosequipo', -10, 0, 0, 0, 0, utf8_decode ('compañero en la mazmorra'), $equ_id);
+
+        if($stmt6 == "true" && $stmt7 == "true"){
+          $resultado = "true";
+        }else{
+          $resultado = "false";
+        }
+      }else{
+        $resultado = "true";
+      }
+    } else {
+      $resultado = "false";
+    }
+  }
+  return $resultado;
 }
 ?>
