@@ -11,7 +11,7 @@
     <div class="col-xs-4 col-md-4">
       <br/><br/><br/><br/><br/><br/>
       <div class="row text-center">
-        <button class="btn btn-success row" ng-click="asignarAlumno(ev,selectNoAlumnos);">Assignar >></button>
+        <button class="btn btn-success row" ng-click="asignarAlumno(ev,selectNoAlumnos);" ng-disabled="btnAsignar">Assignar >></button>
       </div>
       <br/>
       <div class="row text-center">

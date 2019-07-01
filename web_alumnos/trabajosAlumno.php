@@ -8,7 +8,7 @@
             <b>ELS MEUS TREBALLS</b>
           </h4>
         </div>
-        <table class="table table-fixed" style="font-family:Cooperplate Gothic Light;">
+        <table class="table" style="font-family:Cooperplate Gothic Light;">
           <thead>
             <tr>
               <th class="col-xs-4">TREBALL</th>

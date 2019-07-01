@@ -11,7 +11,10 @@ $aleatorio = rand(0, $fila-1);
 
 
 
-$stmt = $DBcon->prepare("SELECT * FROM equipos WHERE cla_id = ".$cla_id." LIMIT ".$aleatorio.", 1");
+$stmt = $DBcon->prepare("SELECT e.equ_id, e.equ_nombre, e.equ_descripcion, i.img_ruta 
+                          FROM equipos AS e
+                          INNER JOIN imagenes AS i ON i.img_id = e.equ_escudo
+                          WHERE e.equ_estado = 1 AND e.cla_id = ".$cla_id." LIMIT ".$aleatorio.", 1");
 
 function utf8ize($d) {
     if (is_array($d)) {

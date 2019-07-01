@@ -43,9 +43,9 @@
                       <label style="font-family:Cooperplate Gothic Light;">PO:</label>
                       <input class="form-control" ng-model="trabajo.tra_PO" type="number" placeholder="PO" style="font-family:Cooperplate Gothic Light;" required/>
                     </div>
-                    <div class="col-xs-2 col-md-2">
+                    <div class="col-xs-2 col-md-2" ng-hide="true">
                       <label style="font-family:Cooperplate Gothic Light;">PP:</label>
-                      <input class="form-control" ng-model="trabajo.tra_PP" type="number" placeholder="PP" style="font-family:Cooperplate Gothic Light;" required/>
+                      <input class="form-control" ng-model="trabajo.tra_PP" type="number" placeholder="PP" style="font-family:Cooperplate Gothic Light;"/>
                     </div>
                     <div class="col-xs-2 col-md-2">
                       <label style="font-family:Cooperplate Gothic Light;">FO:</label>

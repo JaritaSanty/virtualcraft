@@ -512,6 +512,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
   };
 
   $scope.showAleatorio = function(ev) {
+    $scope.preghide = false;
     $mdDialog.show({
         templateUrl: '../web_profesores/popupAleatorio.php',
         parent: angular.element(document.body),
@@ -534,6 +535,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
       $scope.equipoAleatorio = data[0];
       $scope.equipohide = false;
       $scope.alumnohide = true;
+      $scope.preghide = true;
     });
   };
 
@@ -548,6 +550,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
       $scope.alumnoAleatorio = data[0];
       $scope.equipohide = true;
       $scope.alumnohide = false;
+      $scope.preghide = true;
     });
   };
 
@@ -1103,7 +1106,7 @@ function($scope, $http, $cookies, $mdDialog, $location) {
   $scope.showTrabajoAlumno = function(ev, alumno) {
     $scope.alumno = alumno;
     $scope.trabajos = "";
-    var class_data='aluclaequ_id=' +alumno.aluclaequ_id + "&datosCurso="+JSON.stringify($scope.curso);
+    var class_data='aluclaequ_id=' +alumno.aluclaequ_id + '&equ_id=' +alumno.equ_id + "&datosCurso="+JSON.stringify($scope.curso);
     $http({
       method: 'POST',
       url: '../srv/getTrabajosCurso.php',
@@ -1112,22 +1115,22 @@ function($scope, $http, $cookies, $mdDialog, $location) {
     }).success(function(data) {
       $scope.trabajos = data;
       for(i=0; i<$scope.trabajos.length; i++){
-        if($scope.trabajos[i].trasig_clase == 'true'){
-          $scope.trabajos[i].btnAlumno = false;
-          $scope.trabajos[i].btnEquipo = false;
-          $scope.trabajos[i].btnClase = false;
-        }else if($scope.trabajos[i].trasig_equipo == 'true'){
+        if($scope.trabajos[i].trasig_clase === 'true' && $scope.trabajos[i].trasig_equipo === 'false' && $scope.trabajos[i].trasig_alumno === 'false'){
           $scope.trabajos[i].btnAlumno = false;
           $scope.trabajos[i].btnEquipo = false;
           $scope.trabajos[i].btnClase = true;
-        }else if($scope.trabajos[i].trasig_alumno == 'true'){
+        }else if($scope.trabajos[i].trasig_clase === 'true' && $scope.trabajos[i].trasig_equipo == 'true' && $scope.trabajos[i].trasig_alumno == 'false'){
           $scope.trabajos[i].btnAlumno = false;
           $scope.trabajos[i].btnEquipo = true;
           $scope.trabajos[i].btnClase = true;
-        }else{
+        }else if($scope.trabajos[i].trasig_clase === 'true' && $scope.trabajos[i].trasig_equipo == 'true' && $scope.trabajos[i].trasig_alumno == 'true'){
           $scope.trabajos[i].btnAlumno = true;
           $scope.trabajos[i].btnEquipo = true;
           $scope.trabajos[i].btnClase = true;
+        }else{
+          $scope.trabajos[i].btnAlumno = false;
+          $scope.trabajos[i].btnEquipo = false;
+          $scope.trabajos[i].btnClase = false;
         }
       }
       $scope.propertyName = 'tra_id';
@@ -2131,56 +2134,80 @@ function($scope, $http, $cookies, $mdDialog) {
   }
 
   $scope.quitarAlumno = function(ev,alucla_id){
-    for (var i=0; i<(alucla_id.length); i++) {
-      var post_data='alucla_id='+alucla_id[i]+"&datosCurso="+JSON.stringify($scope.curso);
-      $http({
-          method: 'POST',
-          url: '../srv/quitarAlumnoCurso.php',
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-          data: post_data
-      }).then(function(response) {
-          if(response.data === 'true'){
-          }else{
-              $mdDialog.show(
-                  $mdDialog.alert()
-                  .clickOutsideToClose(false)
-                  .title('Advertencia:')
-                  .textContent('Algunos alumnos no se pudieron quitarlos del curso...!!! Informe al administrador del Sistema')
-                  .ariaLabel('Alert Dialog Demo')
-                  .ok('Aceptar')
-                  .targetEvent(ev)
-              );
-              console.log(response);
-          }
-          $scope.ActualizarCombos();
-      });
+    if(alucla_id === undefined){
+      $mdDialog.show(
+          $mdDialog.alert()
+          .clickOutsideToClose(false)
+          .title('Advertencia:')
+          .textContent('Debe seleccionar uno o más alumnos para quitarles de la clase.')
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Aceptar')
+          .targetEvent(ev)
+      );
+    }else{
+      for (var i=0; i<(alucla_id.length); i++) {
+        var post_data='alucla_id='+alucla_id[i]+"&datosCurso="+JSON.stringify($scope.curso);
+        $http({
+            method: 'POST',
+            url: '../srv/quitarAlumnoCurso.php',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            data: post_data
+        }).then(function(response) {
+            if(response.data === 'true'){
+            }else{
+                $mdDialog.show(
+                    $mdDialog.alert()
+                    .clickOutsideToClose(false)
+                    .title('Advertencia:')
+                    .textContent('Algunos alumnos no se pudieron quitarlos del curso...!!! Informe al administrador del Sistema')
+                    .ariaLabel('Alert Dialog Demo')
+                    .ok('Aceptar')
+                    .targetEvent(ev)
+                );
+                console.log(response);
+            }
+            $scope.ActualizarCombos();
+        });
+      }
     }
   };
 
   $scope.asignarAlumno = function(ev,alu_id){
-    for (var i=0; i<(alu_id.length); i++) {
-      var post_data='alu_id='+alu_id[i]+"&datosCurso="+JSON.stringify($scope.curso);
-      $http({
-          method: 'POST',
-          url: '../srv/asignarAlumnoCurso.php',
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-          data: post_data
-      }).then(function(response) {
-          if(response.data === 'true'){
-          }else{
-              $mdDialog.show(
-                  $mdDialog.alert()
-                  .clickOutsideToClose(false)
-                  .title('Advertencia:')
-                  .textContent('Algunos alumnos no se pudieron agregarlos al curso...!!! Informe al administrador del Sistema')
-                  .ariaLabel('Alert Dialog Demo')
-                  .ok('Aceptar')
-                  .targetEvent(ev)
-              );
-              console.log(response);
-          }
-          $scope.ActualizarCombos();
-      });
+    if(alu_id === undefined){
+      $mdDialog.show(
+          $mdDialog.alert()
+          .clickOutsideToClose(false)
+          .title('Advertencia:')
+          .textContent('Debe seleccionar uno o más alumnos para asignarles a la clase.')
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Aceptar')
+          .targetEvent(ev)
+      );
+    }else{
+      for (var i=0; i<(alu_id.length); i++) {
+        var post_data='alu_id='+alu_id[i]+"&datosCurso="+JSON.stringify($scope.curso);
+        $http({
+            method: 'POST',
+            url: '../srv/asignarAlumnoCurso.php',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            data: post_data
+        }).then(function(response) {
+            if(response.data === 'true'){
+            }else{
+                $mdDialog.show(
+                    $mdDialog.alert()
+                    .clickOutsideToClose(false)
+                    .title('Advertencia:')
+                    .textContent('Algunos alumnos no se pudieron agregarlos al curso...!!! Informe al administrador del Sistema')
+                    .ariaLabel('Alert Dialog Demo')
+                    .ok('Aceptar')
+                    .targetEvent(ev)
+                );
+                console.log(response);
+            }
+            $scope.ActualizarCombos();
+        });
+      }
     }
   };
 }]);
@@ -2489,57 +2516,81 @@ function($scope, $http, $cookies, $mdDialog) {
   }
 
   $scope.quitarAlumno = function(ev,aluclaequ_id){
-    for (var i=0; i<(aluclaequ_id.length); i++) {
-      var post_data='aluclaequ_id='+aluclaequ_id[i]+"&datosCurso="+JSON.stringify($scope.curso)+"&datosEquipo="+JSON.stringify($scope.equipo);
-      $http({
-          method: 'POST',
-          url: '../srv/quitarAlumnoEquipo.php',
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-          data: post_data
-      }).then(function(response) {
-          if(response.data === 'true'){
-          }else{
-            console.log(response);
-            $mdDialog.show(
-                $mdDialog.alert()
-                .clickOutsideToClose(false)
-                .title('Advertencia:')
-                .textContent('Algunos alumnos no se pudieron quitar del equipo...!!! Informe al administrador del Sistema')
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Aceptar')
-                .targetEvent(ev)
-            );
-            console.log(response);
-          }
-          $scope.ActualizarCombos();
-      });
-    }
-  };
-
-  $scope.asignarAlumno = function(ev,alucla_id){
-    for (var i=0; i<(alucla_id.length); i++) {
-      var post_data='alucla_id='+alucla_id[i]+"&datosCurso="+JSON.stringify($scope.curso)+"&datosEquipo="+JSON.stringify($scope.equipo);
-      $http({
-          method: 'POST',
-          url: '../srv/asignarAlumnoEquipo.php',
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-          data: post_data
-      }).then(function(response) {
-          if(response.data === 'true'){
-          }else{
+    if(aluclaequ_id === undefined){
+      $mdDialog.show(
+          $mdDialog.alert()
+          .clickOutsideToClose(false)
+          .title('Advertencia:')
+          .textContent('Debe seleccionar uno o más alumnos para quitarles del equipo.')
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Aceptar')
+          .targetEvent(ev)
+      );
+    }else{
+      for (var i=0; i<(aluclaequ_id.length); i++) {
+        var post_data='aluclaequ_id='+aluclaequ_id[i]+"&datosCurso="+JSON.stringify($scope.curso)+"&datosEquipo="+JSON.stringify($scope.equipo);
+        $http({
+            method: 'POST',
+            url: '../srv/quitarAlumnoEquipo.php',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            data: post_data
+        }).then(function(response) {
+            if(response.data === 'true'){
+            }else{
+              console.log(response);
               $mdDialog.show(
                   $mdDialog.alert()
                   .clickOutsideToClose(false)
                   .title('Advertencia:')
-                  .textContent('Algunos alumnos no se pudieron agregarlos al curso...!!! Informe al administrador del Sistema')
+                  .textContent('Algunos alumnos no se pudieron quitar del equipo...!!! Informe al administrador del Sistema')
                   .ariaLabel('Alert Dialog Demo')
                   .ok('Aceptar')
                   .targetEvent(ev)
               );
               console.log(response);
-          }
-          $scope.ActualizarCombos();
-      });
+            }
+            $scope.ActualizarCombos();
+        });
+      }
+    }
+  };
+
+  $scope.asignarAlumno = function(ev,alucla_id){
+    if(alucla_id === undefined){
+      $mdDialog.show(
+          $mdDialog.alert()
+          .clickOutsideToClose(false)
+          .title('Advertencia:')
+          .textContent('Debe seleccionar uno o más alumnos para asignarles al equipo.')
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Aceptar')
+          .targetEvent(ev)
+      );
+    }else{
+      for (var i=0; i<(alucla_id.length); i++) {
+        var post_data='alucla_id='+alucla_id[i]+"&datosCurso="+JSON.stringify($scope.curso)+"&datosEquipo="+JSON.stringify($scope.equipo);
+        $http({
+            method: 'POST',
+            url: '../srv/asignarAlumnoEquipo.php',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            data: post_data
+        }).then(function(response) {
+            if(response.data === 'true'){
+            }else{
+                $mdDialog.show(
+                    $mdDialog.alert()
+                    .clickOutsideToClose(false)
+                    .title('Advertencia:')
+                    .textContent('Algunos alumnos no se pudieron agregarlos al curso...!!! Informe al administrador del Sistema')
+                    .ariaLabel('Alert Dialog Demo')
+                    .ok('Aceptar')
+                    .targetEvent(ev)
+                );
+                console.log(response);
+            }
+            $scope.ActualizarCombos();
+        });
+      }
     }
   };
 }]);
@@ -2779,55 +2830,55 @@ function($scope, $http, $cookies, $mdDialog) {
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           data: post_data
       });
-
       $scope.CargarTabla();
   };
 
   $scope.showNuevoCastigo = function(ev) {
-      $mdDialog.show({
-          templateUrl: '../web_profesores/popupNuevoCastigo.php',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose:false,
-          fullscreen: $scope.customFullscreen,
-          scope: $scope,
-          preserveScope:true
-      }).then(function(answer) {
-        if (answer.respuesta==="nuevo") {
-            var post_data='act_nombre=' +answer.castigo.act_nombre+'&act_descripcion='+answer.castigo.act_descripcion+'&act_PV='+answer.castigo.act_PV+'&act_PD='+answer.castigo.act_PD+'&act_PO='+answer.castigo.act_PO+'&act_PP='+answer.castigo.act_PP+'&act_FO='+answer.castigo.act_FO+'&act_tipo=castigo'+"&datosCurso="+JSON.stringify($scope.curso);
-            $http({
-                method: 'POST',
-                url: '../srv/createNuevaActuacion.php',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                data: post_data
-            }).then(function(response) {
-                if(response.data === 'true'){
-                    $mdDialog.show(
-                        $mdDialog.alert()
-                        .clickOutsideToClose(false)
-                        .title('Información:')
-                        .textContent('El registro se ingresó correctamente...!!!')
-                        .ariaLabel('Alert Dialog Demo')
-                        .ok('Aceptar')
-                        .targetEvent(ev)
-                    ).then(function() {
-                        location.reload(true);
-                    });
-                }else{
-                    $mdDialog.show(
-                        $mdDialog.alert()
-                        .clickOutsideToClose(false)
-                        .title('Advertencia:')
-                        .textContent('El registro no se ingresó correctamente...!!! Informe al administrador del Sistema')
-                        .ariaLabel('Alert Dialog Demo')
-                        .ok('Aceptar')
-                        .targetEvent(ev)
-                    );
-                    console.log(response);
-                }
-            });
-        }
-      });
+
+    $mdDialog.show({
+      templateUrl: '../web_profesores/popupNuevoCastigo.php',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: false,
+      fullscreen: $scope.customFullscreen,
+      scope: $scope,
+      preserveScope: true
+    }).then(function(answer) {
+      if (answer.respuesta==="nuevo") {
+          var post_data='act_nombre=' +answer.castigo.act_nombre+'&act_descripcion='+answer.castigo.act_descripcion+'&act_PV='+answer.castigo.act_PV+'&act_PD='+answer.castigo.act_PD+'&act_PO='+answer.castigo.act_PO+'&act_PP='+answer.castigo.act_PP+'&act_FO='+answer.castigo.act_FO+'&act_tipo=castigo'+"&datosCurso="+JSON.stringify($scope.curso);
+          $http({
+              method: 'POST',
+              url: '../srv/createNuevaActuacion.php',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              data: post_data
+          }).then(function(response) {
+              if(response.data === 'true'){
+                  $mdDialog.show(
+                      $mdDialog.alert()
+                      .clickOutsideToClose(false)
+                      .title('Información:')
+                      .textContent('El registro se ingresó correctamente...!!!')
+                      .ariaLabel('Alert Dialog Demo')
+                      .ok('Aceptar')
+                      .targetEvent(ev)
+                  ).then(function() {
+                      location.reload(true);
+                  });
+              }else{
+                  $mdDialog.show(
+                      $mdDialog.alert()
+                      .clickOutsideToClose(false)
+                      .title('Advertencia:')
+                      .textContent('El registro no se ingresó correctamente...!!! Informe al administrador del Sistema')
+                      .ariaLabel('Alert Dialog Demo')
+                      .ok('Aceptar')
+                      .targetEvent(ev)
+                  );
+                  console.log(response);
+              }
+          });
+      }
+    });
   };
 
   $scope.showEditarCastigo = function(ev, castigo) {
@@ -2880,7 +2931,8 @@ function($scope, $http, $cookies, $mdDialog) {
   };
 
   $scope.cancel = function() {
-      $mdDialog.cancel();
+    location.reload(true);
+    $mdDialog.cancel();
   };
 
   $scope.answer = function(value, castigo) {
@@ -2957,6 +3009,7 @@ function($scope, $http, $cookies, $mdDialog) {
   };
 
   $scope.showNuevoTrabajo = function(ev) {
+
       $mdDialog.show({
           templateUrl: '../web_profesores/popupNuevoTrabajo.php',
           parent: angular.element(document.body),

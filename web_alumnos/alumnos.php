@@ -28,7 +28,7 @@
       <br/>
       <div class="row">
         <div class="col-xs-4 col-md-3 text-center" ng-repeat="curso in cursos">
-          <a href="" ng-click="goPanelAlumno(curso);">
+          <a href="" ng-click="goPanelAlumno(ev, curso);">
             <div class="thumbnail">
               <img class="img-responsive" ng-src="../{{curso.equ_escudo}}" alt="Fondo de {{curso.cla_nombre}}" style="width:100%">
               <div class="caption">

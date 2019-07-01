@@ -74,8 +74,8 @@
               </a>
             </div>
             <div class="col-xs-3 col-md-6">
-              <a href="#/privilegios">
-                <img class="img-responsive" src="../images/privilegis.png" alt="Privilegis">
+              <a href="{{alumno.mazmorra}}" ng-disabled="alumno.mazmorra">
+                <img class="img-responsive" ng-src="{{alumno.privilegis}}" alt="Privilegis">
               </a>
             </div>
             <div class="col-xs-3 col-md-3">

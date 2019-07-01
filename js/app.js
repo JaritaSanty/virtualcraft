@@ -48,6 +48,21 @@ function($scope, $http, $cookies, $mdDialog) {
                 console.log(response);
             }
         });
+			} else if (data[0].usu_gestor === "1") {
+				$cookies.put('datosUsuario', JSON.stringify(data[0]));
+				window.location.href = 'web_gestor/master.php';
+        var class_data='log_operacion=LoginGestor&log_aplicacion=Web';
+        $http({
+            method: 'POST',
+            url: 'srv/createNuevoLog.php',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            data: class_data
+        }).then(function(response) {
+            if(response.data === 'true'){
+            }else{
+                console.log(response);
+            }
+        });
 			} else if (data === 'ProfesorAlumno') {
 				$mdDialog.show(
 					$mdDialog.alert()
@@ -65,10 +80,10 @@ function($scope, $http, $cookies, $mdDialog) {
         }).then(function(response) {
             if(response.data === 'true'){
             }else{
-                console.log(response);
+              console.log(response);
             }
         });
-			} else {
+			}else {
 				$mdDialog.show(
 					$mdDialog.alert()
 					.clickOutsideToClose(false)

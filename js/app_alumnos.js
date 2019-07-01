@@ -100,9 +100,21 @@ function($scope, $http, $cookies, $mdDialog, $location) {
       $scope.cursos = data;
 		});
 
-    $scope.goPanelAlumno = function(curso) {
+    $scope.goPanelAlumno = function(ev, curso) {
       $cookies.put('datosCurso', JSON.stringify(curso));
-      window.location.href = '../web_alumnos/master.php';
+      if(curso.aluclaequ_estado === "1"){
+        window.location.href = '../web_alumnos/master.php';
+      }else{
+        $mdDialog.show(
+            $mdDialog.alert()
+            .clickOutsideToClose(false)
+            .title('Advertència:')
+            .textContent('El teu professor no t\'ha assignat a un equip.')
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Acceptar')
+            .targetEvent(ev)
+        );
+      }
     }
 }]);
 
@@ -120,6 +132,14 @@ function($scope, $http, $cookies, $mdDialog, $location, postsService, $interval)
   	   postsService.items().then(function(res)
   	   {
          $scope.alumno = res.data[0];
+         if($scope.alumno.aluclaequ_PV === "0"){
+           $scope.alumno.mazmorra = "#/";
+           $scope.alumno.equ_fondo = "images_fondos/mazmorra.jpg";
+           $scope.alumno.privilegis = "../images/privilegismazmorra.png"
+         }else{
+           $scope.alumno.mazmorra = "#/privilegios";
+           $scope.alumno.privilegis = "../images/privilegis.png"
+         }
          $cookies.put('datosAlumno', JSON.stringify($scope.alumno));
   		 });
   	}
@@ -334,7 +354,6 @@ function($scope, $http, $cookies, $mdDialog, $location) {
           $scope.privilegios[i].btnEjecutar = true;
         }
       }
-      console.log($scope.privilegios);
     });
 
     $scope.showDescripcionPrivilegio = function(ev, privilegio) {

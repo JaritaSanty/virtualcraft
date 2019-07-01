@@ -39,7 +39,7 @@
                           <label style="font-family:Cooperplate Gothic Light;">PO:</label>
                           <input class="form-control" string-to-number ng-model="alumno.aluclaequ_aluPO" type="number" placeholder="PO" style="font-family:Cooperplate Gothic Light;" required/>
                         </div>
-                        <div class="col-xs-4 col-md-4">
+                        <div class="col-xs-4 col-md-4" ng-hide="true">
                           <label style="font-family:Cooperplate Gothic Light;">PP:</label>
                           <input class="form-control" string-to-number ng-model="alumno.aluclaequ_aluPP" type="number" placeholder="PP" style="font-family:Cooperplate Gothic Light;" required/>
                         </div>

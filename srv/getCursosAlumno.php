@@ -3,7 +3,7 @@ $obj = json_decode($_POST["datosUsuario"]);
 $alu_id = $obj->alu_id;
 
 require_once 'db_config.php';
-$stmtClases = $DBcon->prepare("SELECT DISTINCT c.cla_id, c.cla_nombre, c.cla_descripcion, i.img_ruta AS cla_fondo, ie.img_ruta AS equ_fondo, iee.img_ruta AS equ_escudo
+$stmtClases = $DBcon->prepare("SELECT DISTINCT c.cla_id, c.cla_nombre, c.cla_descripcion, i.img_ruta AS cla_fondo, ie.img_ruta AS equ_fondo, iee.img_ruta AS equ_escudo, ace.aluclaequ_estado
                                   FROM clases as c
                                   INNER JOIN imagenes AS i ON i.img_id = c.cla_fondo
                                   INNER JOIN alumnosclases AS ac ON ac.cla_id = c.cla_id
@@ -11,7 +11,7 @@ $stmtClases = $DBcon->prepare("SELECT DISTINCT c.cla_id, c.cla_nombre, c.cla_des
                                   INNER JOIN equipos AS e ON e.equ_id = ace.equ_id
                                   INNER JOIN imagenes AS ie ON ie.img_id = e.equ_fondo
                                   INNER JOIN imagenes AS iee ON iee.img_id = e.equ_escudo
-                                  WHERE c.cla_estado = 1 AND ac.alu_id = ".$alu_id);
+                                  WHERE c.cla_estado = 1 AND ac.alucla_estado = 1 AND ac.alu_id = ".$alu_id);
 
 try
  {

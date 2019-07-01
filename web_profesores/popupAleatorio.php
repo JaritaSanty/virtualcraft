@@ -19,12 +19,31 @@
 
         <md-dialog-content class="container-fluid">
             <div class="md-dialog-content">
-              <h1 ng-hide="equipohide" style="font-family:Cooperplate Gothic Light;">{{equipoAleatorio.equ_nombre}}</h1>
-              <h1 ng-hide="alumnohide" style="font-family:Cooperplate Gothic Light;">{{alumnoAleatorio.alucla_nombre}}</h1>
+              <div class="row" ng-hide="preghide">
+                <div class="col col-xs-12 col-md-12">
+                  <h1 style="font-family:Cooperplate Gothic Light;">¿Quieres un alumno o equipo aleatorio?</h1>
+                </div>
+              </div>
+              <div class="row" ng-hide="equipohide">
+                <div class="col col-xs-4 col-md-4">
+                  <img class="img-responsive" src="../{{equipoAleatorio.img_ruta}}" alt="Logo" width="75%">
+                </div>
+                <div class="col col-xs-8 col-md-8">
+                  <h1 style="font-family:Cooperplate Gothic Light;">{{equipoAleatorio.equ_nombre}}</h1>
+                </div>
+              </div>
+              <div class="row" ng-hide="alumnohide">
+                <div class="col col-xs-4 col-md-4">
+                  <img class="img-responsive" src="../{{alumnoAleatorio.img_ruta}}" alt="Logo" width="100%">
+                </div>
+                <div class="col col-xs-8 col-md-8">
+                  <h1 style="font-family:Cooperplate Gothic Light;">{{alumnoAleatorio.alucla_nombre | uppercase}}</h1>
+                </div>
+              </div>
             </div>
         </md-dialog-content>
         <md-dialog-actions layout="row">
-            <button ng-click="generarEquipoAleatorio();" class="btn btn-info">Equipo</button>
+            <button ng-click="generarEquipoAleatorio();" class="btn btn-info">Equipo</button>&nbsp;&nbsp;
             <button ng-click="generarAlumnoAleatorio();" class="btn btn-warning">Alumno</button>
         </md-dialog-actions>
     </form>

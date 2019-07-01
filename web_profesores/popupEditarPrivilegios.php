@@ -59,7 +59,7 @@
                           <input class="form-control" string-to-number ng-model="privilegio.pri_costPO" ng-disabled="privilegio.pri_costPO === '0' ? true : false" type="number" style="font-family:Cooperplate Gothic Light;" required/>
                         </div>
                       </div>
-                      <div class="row">
+                      <div class="row" ng-hide="true">
                         <div class="col-xs-6 col-md-6">
                           <label style="font-family:Cooperplate Gothic Light;">PP:</label>
                         </div>
